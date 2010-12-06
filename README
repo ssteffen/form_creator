@@ -10,6 +10,10 @@ Available options include viewing the form for submission, editing the forms fie
 
 Installation
 ============
+Required Dependencies:
+FormCreator utilizes haml. Make sure you have the gem installed.
+gem install haml 
+
 Installation is simple, once you have the plugin in your plugin directory, run rake db:migrate:form_creator from your app root. This will generate the three tables that form_creator uses. Then you are good to go.
 
 Developed for Southern Illinois University Housing.
