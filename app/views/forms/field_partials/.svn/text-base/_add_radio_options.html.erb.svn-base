@@ -1,0 +1,11 @@
+<% if @field_hash.nil? || @field_hash.empty? %>
+<li id=<%= 'list_' + session[:count].to_s %>><%= text_field_tag 'info[radio_button_options_' + session[:count].to_s + ']', nil,
+					:size => 30, :maxlength => 65 %> <%= link_to_remote 'Remove Option', 
+					{:url => {:action => 'remove_radio_option', :id => session[:count]}}, :id => 'remove_option_' + session[:count].to_s%></li>
+
+<% else %>
+<li id=<%= 'list_' + @edit.to_s %>><%= text_field_tag 'info[radio_button_options_' + @edit.to_s + ']', 
+					@field_hash["radio_button_options_#{@edit.to_s}".to_sym], 
+					:size => 30, :maxlength => 65 %> <%= link_to_remote 'Remove Option', 
+					{:url => {:action => 'remove_radio_option', :id => @edit}}, :id => 'remove_option_' + @edit.to_s%></li>
+<% end %>

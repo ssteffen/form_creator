@@ -1,0 +1,56 @@
+- form_for @form do |f|
+	- if @form.errors.any?
+		#error_explanation
+			%h2
+				= pluralize(@form.errors.count, "error") |
+				prohibited this form from being saved
+			%ul
+				- @form.errors.full_messages.each do |msg| 
+					%li= msg 
+	- field_set_tag "Form Information" do
+		%ul
+			%li
+				= f.label :title 
+				= f.text_field :title, :size => 30, :maxlength => 255, :class=> "defaultText", :title => "Form Title"
+			%li
+				= f.label :stub 
+				= f.text_field :stub, :size => 50, :maxlength => 255, :class=> "defaultText", :title => "Form Stub"
+			%li
+				= f.label :prepend_content
+				= f.text_area  :prepend_content, :height => 300, :width => 500
+				%script{:type => "text/javascript"}
+					CKEDITOR.replace('form[prepend_content]');
+			%li 
+				= f.label :append_content
+				= f.text_area  :append_content, :height => 300, :width => 500
+				%script{:type => "text/javascript"}
+					CKEDITOR.replace("form[append_content]");
+			%li 
+				= f.label :success_message
+				= f.text_area :success_message, :size => "30x15", :class => 'defaultText', :title => 'Message on successful completion of the form.'
+				
+			%li
+				= f.label :failure_message 
+				= f.text_area :failure_message, :size => '30x15', :class => 'defaultText', :title => 'Message on failure to complete the form.'
+				
+			%li
+				= f.label :enabled, "Enabled?" 
+				= f.check_box :enabled	
+			%li
+				= f.label :available_at
+				= f.datetime_select :available_at 
+			%li
+				= f.label :unavailable_at 
+				= f.datetime_select :unavailable_at
+			%li
+				= f.label :unavailable_message
+				= f.text_area :unavailable_message, :size => '30x15', :class => 'defaultText', :title => 'Message to display when the form is unavailable.'
+			%li 
+				= f.label :updated_at 
+				= f.datetime_select :updated_at
+			%li 
+				= f.label :email_notification_address, "Send Email Notification To"
+				= f.text_field :email_notification_address, :size => 30, :maxlength => 255, :class => 'defaultText'
+	.actions
+		=f.submit
+

@@ -1,0 +1,34 @@
+.container_12 
+	.grid_3     
+		%h2
+			= @form.title 
+			Submission for 
+			= @name 
+		%p
+			= button_to "View All Submissions for #{@form.title}", :action => "alt_submissions", :id => @form.id
+			= link_to "Back to Forms", :action => 'index'
+	.clear
+	%br
+	.grid_6{:style => "float:none;"}
+		%ul
+			- check = Hash.new
+			- for result in @results
+				- if result[1] == "Check Box"
+					- unless check[result[0].to_sym] == true
+						%li
+							%strong= result[0]
+							%ul
+								- for option in @checkbox_hash[result[0].to_sym] 
+									%li= option
+								- check[result[0].to_sym] = true 
+				- else
+					%li
+						%strong
+							= result[0].capitalize.gsub('_', ' ')
+							\:
+						= result[1] 
+			%li
+				%strong Created At: 
+				= @form_result.created_at.strftime("%m/%d/%Y")
+- for result in @results_hash 
+	- check[result[0].to_sym] = nil

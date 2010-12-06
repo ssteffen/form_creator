@@ -1,0 +1,7 @@
+<% if @field_hash.nil? || @field_hash.empty? || @field_hash[:text_area_size].nil? %>
+Size ("ColumnsXRows"): <%= text_field_tag 'info[text_area_size]', nil, :size => 10, :maxlength => 10 %>
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>
+<% else %>
+Size ("ColumnsXRows"): <%= text_field_tag 'info[text_area_size]', @field_hash[:text_area_size], :size => 10, :maxlength => 10 %>
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>
+<% end %>

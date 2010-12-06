@@ -1,0 +1,19 @@
+<% if @field_hash.nil? || @field_hash.empty? %>
+	Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %> 	
+	<%= link_to_remote 'Add Option', :url => {:action => 'add_radio_options', :id => @field_hash} %></li>
+	<li id="list_1">Options: <br /><%= text_field_tag 'info[radio_button_options_' + session[:count].to_s + ']', nil, :size => 30, :maxlength => 65 %></li>
+
+	
+<% else %>
+	Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %> 	<%= link_to_remote 'Add Option', :url => {:action => 'add_radio_options', :id => @field_hash} %>
+	<% session[:count] = 0 %>
+	<% for option in @field do %>
+		<% if option[0] =~ /(radio_button_options_)./ %>
+			<% @edit = option[0].match(/[0-9]{1,3}/).to_s.to_i%>
+			<% session[:count] += 1%>
+			<%= render :partial => 'admin/new_forms/field_partials/add_radio_options.html.erb' %>
+			
+		<% end %>
+	<% end %>
+
+<% end %>

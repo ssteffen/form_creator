@@ -1,0 +1,1 @@
+page.insert_html :bottom, "field_settings", :partial => 'forms/field_partials/add_checkbox_options.html.haml' 

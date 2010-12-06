@@ -1,0 +1,9 @@
+<% if @field_hash.nil? || @field_hash.empty? %>
+	From <%= text_field_tag 'info[select_box_from]', nil, :size => 3, :maxlength => 10 %> 
+	To <%= text_field_tag 'info[select_box_to]', nil, :size => 3, :maxlength => 10 %>
+	Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %> 	
+<% else %>
+	From <%= text_field_tag 'info[select_box_from]', @field_hash[:select_box_from], :size => 3, :maxlength => 10 %> 
+	To <%= text_field_tag 'info[select_box_to]', @field_hash[:select_box_to], :size => 3, :maxlength => 10 %>
+	Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>
+<% end %>

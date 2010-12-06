@@ -1,0 +1,22 @@
+
+= link_to("Add New Field", :action => 'add_field', :id => @form.id)
+= link_to("Delete all fields", :action => 'delete_all_fields', :id => @form.id) 
+= link_to("Done", :action => 'index')
+
+%h3 List of Current Fields
+%p you may re-edit and delete elements in the list
+%table
+	%tr
+		%th Name
+		%th Type
+		%th Edit
+		%th Delete
+	- if @fields.blank?
+		%h4 No Fields Created
+	-else
+		- for field in @fields do
+			%tr
+				%td= field[:fields_name]
+				%td= field[:fields_type]
+				%td= link_to("Edit", :action => 'edit_field', :id => @form.id, :field_id => CGI.escape(field[:fields_name]))
+				%td= link_to("Delete", :action => 'delete_field', :id => @form.id, :field_id => CGI.escape(field[:fields_name]))

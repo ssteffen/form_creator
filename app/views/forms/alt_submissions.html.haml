@@ -1,0 +1,47 @@
+.container_12
+	.grid_3       
+		%h2 
+			Form Submissions for 
+			= @form.title
+		%p=link_to "Back to Forms", :action => 'index'
+	.clear
+	%br
+	.grid_6
+		%table.list_form
+			%thead
+				%tr
+					%th Name
+					%th Time Submitted
+					%th View Submission
+					%th Delete Submission
+			%tbody
+				- for result in @results 
+					- array = Hash.new
+					- array = YAML.load(result.response) 
+					- found_names = false 
+					- for elem in array 
+						- if elem[0] == "first_name" 
+							- name = elem[1] 
+							- found_names = true
+							- for e in array 
+								- if e[0] == "last_name" 
+									- name += " #{e[1]}"
+							- break 
+					- unless found_names 
+						- for elem in array 
+							- if elem[0] =~ /(name)/ || elem[0] =~ /(last_name)/ 
+								- name = elem[1]
+					%tr{:style => "text-align:center;"}
+						- if name.nil? 
+							%td
+								= array.to_a[0][0]
+								\:
+								= array.to_a[0][1] 
+						- else 
+							%td= name  
+						%td= result.updated_at.strftime("%m/%d/%Y") 
+						%td.action
+							= link_to image_tag('/images/icons/page_white_magnify.png', :alt => "View Submission"), :action => 'view_alt_result', :id => result.id 
+						%td.action
+							= link_to(image_tag('/images/icons/delete.png', :alt => "Delete Submission"), {:action => 'delete_result', :id => result.id }, :confirm => "Are you sure you want to delete this response?") 
+		= will_paginate @results 

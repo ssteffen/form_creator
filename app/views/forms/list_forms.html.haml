@@ -1,0 +1,6 @@
+%h2.johndoe Online Forms
+%ul.entryText{:style => "list-style-type: none;"}
+  - for f in @form_list do
+    %li= link_to(f.title, :action => "display_form", :id => f.id)
+  - for f in @alt_forms do
+    %li= link_to(f.title, :action => f.id)

@@ -1,0 +1,7 @@
+<% if @field_hash.nil? || @field_hash.empty? %>
+	Terms and Conditions Text: <%= text_area_tag 'info[accept_terms]',nil, :size => '30x10' %> 	
+	
+<% else %>
+	Terms and Conditions Text: <%= text_area_tag 'info[accept_terms]',@field_hash[:accept_terms], :size => '30x10' %> 
+	
+<% end %>

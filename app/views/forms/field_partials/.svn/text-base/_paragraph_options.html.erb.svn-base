@@ -1,0 +1,5 @@
+<% if @field_hash.nil? || @field_hash.empty? || @field_hash[:paragraph_text].nil? %>
+	<%= label_tag 'Text' %>&nbsp;<%= text_area_tag 'info[paragraph_text]', nil, :size => '30x10' %>
+<% else %>
+	<%= label_tag 'Text' %>&nbsp;<%= text_area_tag 'info[paragraph_text]', @field_hash[:paragraph_text], :size => '30x10' %>
+<% end %>

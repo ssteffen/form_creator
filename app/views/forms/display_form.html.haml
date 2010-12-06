@@ -1,0 +1,109 @@
+%h2.johndoe= @form.title
+- if @form.available_at < DateTime.now && @form.enabled
+	= @form.prepend_content
+	- unless flash[:notice].blank?
+		%p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}= flash[:notice]
+		%br/
+	- form_tag({:action => 'display_form'}, {:id => 'hsgform', :class => 'hsgform'}) do
+		%ul{:style => "list-style-type: none;"}
+			- for l in @fields_array do
+				- fields_name = l[:fields_name].downcase.gsub(' ', '_')
+				- if l[:fields_type] == "Text Field"
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= text_field_tag "form[#{fields_name}]", unless params[:form].blank? then params[:form][fields_name.to_sym] else nil end, :size => l[:text_field_size], :maxlength => l[:text_field_max]
+				- if l[:fields_type] == "Text Area"
+					%li
+						= label_tag l[:fields_name], nil
+						= text_area_tag "form[#{fields_name}]", unless params[:form].blank? then params[:form][fields_name.to_sym] else nil end, :size => l[:text_area_size]
+				- if l[:fields_type] == "Check Box"
+					%li
+						- options = []
+						- s = l.to_a.sort{|x, y| x[0] <=> y[0]}
+						- for option in s
+							- if option[0] =~ /(checkbox_options_)/
+								- i = option[0][17..-1].to_i
+								- options[i] = option[1]
+						.inlineLabel= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						.inlineContent
+							%ul#inLabel{:style => "list-style-type: none;"}
+								- for item in options
+									- unless item.nil?
+										%li
+											= check_box_tag "form[#{fields_name + '_' + item.downcase.gsub(' ', '_')}]", item, unless params[:form].blank? then if params[:form][(fields_name + '_' + item.downcase.gsub(' ', '_')).to_sym] == item then true else false end else false end
+											= item
+											%br
+				- if l[:fields_type] == "Radio Button"
+					%li
+						- options = []
+						- s = l.to_a.sort{|x, y| x[0] <=> y[0]}
+						- for option in s
+							- if option[0] =~ /(radio_button_options)/
+								- i = option[0][21..-1].to_i
+								- options[i] = option[1]
+						.inlineLabel= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						.inlineContent
+							%ul#inLabel{:style => "list-style-type: none;"}
+								- for item in options
+									- unless item.nil?
+										%li
+											= radio_button_tag "form[#{fields_name}]", item, unless params[:form].blank? then if params[:form][fields_name.to_sym] == item then true else false end else false end
+											= item
+											%br
+				- if l[:fields_type] == "Select Box"
+					%li
+						- options = []
+						- s = l.to_a.sort{|x, y| x[0] <=> y[0]}
+						- for option in s
+							- if option[0] =~ /(select_box_options)/
+								- i = option[0][19..-1].to_i
+								- options[i] = option[1]
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= select_tag "form[#{fields_name}]", options_for_select(options, unless params[:form].blank? then params[:form][fields_name.to_sym] else nil end)
+				- if l[:fields_type] == "Numbered Select Box"
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						- options = []
+						- for i in l[:select_box_from] .. l[:select_box_to] do
+							- options << i
+						= select_tag "form[#{fields_name}]", options_for_select(options)
+				- if l[:fields_type] == "Date Select"
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						- if l[:date_select_format] == "Day"
+							= select_tag "form[#{fields_name}]", options_for_select([['Sunday'], 'Monday', 'Tuesday','Wednesday', 'Thursday', 'Friday', 'Saturday'],  unless params[:form].blank? then params[:form][fields_name.to_sym] else nil end)
+						- elsif l[:date_select_format] == 'yyyy'
+							= select_year Date.current, {:start_year => l[:date_select_start_year], :end_year => l[:date_select_start_year], :prefix => fields_name}
+						- elsif l[:date_select_format == 'Month']
+							= select_month Date.current, {:prefix => fields_name}
+						- else
+							= select_date(Date.current, {:order => [:month, :day, :year], :prefix => fields_name, :date_separator => '/', :start_year => l[:date_select_start_year], :end_year => l[:date_select_end_year]})
+				- if l[:fields_type] == 'Time Select'
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= select_time Time.current, :prefix => fields_name, :time_separator => ':', :include_seconds => true
+				- if l[:fields_type] == 'DateTime Select'
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= select_datetime Time.current, :prefix => fields_name, :time_separator => ':', :date_separator => '/', :datetime_separator => 'at', :include_seconds => true
+				- if l[:fields_type] == 'State Select'
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= select_tag "form[#{fields_name}]", state_options_for_select(selected = 'Illinois', country = 'US')
+				- if l[:fields_type] == 'Country Select'
+					%li
+						= label_tag l[:fields_name], nil, :style => 'vertical-align: baseline;'
+						= select_tag "form[#{fields_name}]", country_options_for_select("United States", ["United States"])
+				- if l[:fields_type] == 'Paragraph'
+					%li
+						= l[:paragraph_text]
+				- if l[:fields_type] == 'Accept Terms'
+					%li
+						= l[:accept_terms]
+						%br
+						= check_box_tag "form[#{fields_name}]", "Accept", false
+						\- I Agree
+			= submit_tag 'Submit'
+	= @form.append_content
+- else
+	= @form.unavailable_message

@@ -1,0 +1,7 @@
+<% if @field_hash.nil? || @field_hash.empty? || @field_hash[:time_select_format].nil? %>
+	Time Format: <%= select_tag 'info[time_select_format]', options_for_select([["hour:minute (AM/PM)"], 'hour:minute (24 hr)', 
+															'hour:minute:second (AM/PM)', 'hour:minute:second (24 hr)']) %>
+<% else %>
+	Time Format: <%= select_tag 'info[time_select_format]', options_for_select([["hour:minute (AM/PM)"], 'hour:minute (24 hr)', 
+															'hour:minute:second (AM/PM)', 'hour:minute:second (24 hr)'], @field_hash[:time_select_format]) %>
+<% end %>

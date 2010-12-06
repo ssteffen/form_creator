@@ -1,0 +1,44 @@
+%h1 Listing forms
+
+%table
+	%tr
+		%th Title
+		%th stub
+		%th enabled?
+		%th Last Update
+		%th Fields Set?
+		%th View Form
+		%th View Submissions
+		%th Edit
+		%th Edit Fields
+		%th Delete
+	%tr
+	- @forms.each do |form|
+		%tr
+			%td= form.title
+			%td= form.stub
+			%td= form.enabled
+			%td= form.updated_at
+			%td= if form.fields.blank? then "No" else "Yes" end
+			%td= link_to 'View Form', {:action => 'display_form', :id => form.id}
+			%td= link_to 'View Submissions', {:action => 'submissions', :id => form.id}
+			%td= link_to 'Edit', edit_form_path(form)
+			%td= link_to 'Edit Fields', {:action => "edit_fields", :id => form.id}
+			%td= link_to 'Destroy', form, :confirm => 'Are you sure?', :method => :delete
+%br
+
+%h2 Alternate Forms (Hard-coded)
+
+%table
+	%tr
+		%th Title
+		%th Stub
+		%th View Form
+		%th View Submissions
+	-@aforms.each do |aform|
+		%td= aform.title
+		%td= aform.stub
+		%td= link_to "View Form", {:action => aform.stub, :id => 0}
+		%td= link_to "View Submissions", {:action => "alt_submissions", :id => aform.id}
+
+= link_to 'New Form', new_form_path

@@ -1,0 +1,130 @@
+%h2.johndoe Housing Contract Cancellation Form
+%p
+  New Students:
+  %br>/
+  Complete the following form to cancel your contract.
+%p
+  If you
+  %u have accepted
+  a room key, this form is void. You must instead complete the Check-Out Process with your RA.  Refer to your
+  %a{:href => "http://www.housing.siu.edu/info/rates-terms-policies"} Contract Terms
+  for additional fee information.
+%p
+  Current Residents:
+  %br>/
+  Complete this form to cancel a contract for a future year.
+%p
+  If you need to cancel your current contract, you must complete the Check-Out process with your RA. Refer to your
+  %a{:href => "http://www.housing.siu.edu/info/rates-terms-policies"} Contract Terms
+  for additional information.
+%p
+  - unless flash[:notice].blank?
+    %p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}= flash[:notice]
+    %br/
+  - form_tag ({:action => "cancel_form", :protocol => 'https://', :only_path => false}, {:id => "hsgform", :class => "hsgform"}) do
+    %fieldset
+      %ul.label_align
+        %li
+          %strong Canceling for:
+          %br/
+          - if (@fall == true)
+          = radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 1).to_s
+          \- #{'Spring ' +  (Time.now.year + 1).to_s} &nbsp;
+          \#{radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 1).to_s}
+          \- #{'Summer ' +  (Time.now.year + 1).to_s} &nbsp;
+          \#{radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + (Time.now.year + 1).to_s}
+          \- #{'Fall ' +  (Time.now.year + 1).to_s}
+          %br/
+          = radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 2).to_s
+          \- #{'Spring ' + (Time.now.year + 2).to_s} &nbsp;
+          \#{radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 2).to_s}
+          \- #{'Summer ' + (Time.now.year + 2).to_s} &nbsp;
+          \#{radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + (Time.now.year + 2).to_s}
+          \- #{'Fall ' + (Time.now.year + 2).to_s}
+  - elsif (@spring == true)
+  = radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 1).to_s
+  \- #{'Summer ' + (Time.now.year + 1).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + (Time.now.year + 1).to_s}
+  \- #{'Fall ' + (Time.now.year + 1).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 2).to_s}
+  \- #{'Spring ' + (Time.now.year + 2).to_s}
+  %br/
+  = radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 2).to_s
+  \- #{'Summer ' + (Time.now.year + 2).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + (Time.now.year + 2).to_s}
+  \- #{'Fall ' + (Time.now.year + 2).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 3).to_s}
+  \- #{'Spring ' + (Time.now.year + 3).to_s}
+  - else
+  = radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + Time.now.year.to_s
+  \- #{'Fall ' + Time.now.year.to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 1).to_s}
+  \- #{'Spring ' + (Time.now.year + 1).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 1).to_s}
+  \- #{'Summer ' + (Time.now.year + 1).to_s}
+  %br/
+  = radio_button_tag 'cancel_form[cancel_for]', 'Fall ' + (Time.now.year + 1).to_s
+  \- #{'Fall ' + (Time.now.year + 1).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Spring ' + (Time.now.year + 2).to_s}
+  \- #{'Spring ' + (Time.now.year + 2).to_s} &nbsp;
+  \#{radio_button_tag 'cancel_form[cancel_for]', 'Summer ' + (Time.now.year + 2).to_s}
+  \- #{'Summer ' + (Time.now.year + 2).to_s}
+  %li
+    = label_tag 'cancel_form[status]', 'Student Status'
+    = radio_button_tag 'cancel_form[status]', '1', :checked => true
+    \- New Student #{radio_button_tag 'cancel_form[status]', '2'} -Current Resident
+  %li
+    = label_tag 'cancel_form[type]', "Contract Type"
+    = radio_button_tag 'cancel_form[type]', '1', :checked => true
+    \- 1-Year Basic
+    \#{radio_button_tag 'cancel_form[type]', '2'} - 2-Year Edge
+  %li
+    = label_tag 'cancel_form[name]', "Student Name"
+    = text_field_tag 'cancel_form[name]', @cancel_form[:name], :size => 35, :maxlength => 65
+  %li
+    = label_tag 'cancel_form[email]', "E-Mail Address"
+    = text_field_tag 'cancel_form[email]', @cancel_form[:email], :size => 35, :maxlength => 65
+  %li
+    = label_tag 'cancel_form[dawgtag]', "Dawgtag"
+    = text_field_tag 'cancel_form[dawgtag]', @cancel_form[:dawgtag], :size => 11, :maxlength => 11
+  %li
+    = label_tag 'cancel_form[room]', "Current Room Assignment (if applicable)"
+    = text_field_tag 'cancel_form[room]', @cancel_form[:room], :size => 35, :maxlength => 65
+  %li
+    = label_tag 'cancel_form[reason]', "Reason for Cancellation"
+    = select_tag ('cancel_form[reason]',                                                                                                                                          |
+      options_for_select([['Not attending SIUC - Please specify where you will be attending in additional comments', 'not attending SIUC'],                                       |
+      ['Financial'], ['Academic Suspension'], ['Medical'],['Living Off Campus'],                                                                                                  |
+      ['Accepted an RA position - Please specify assigned housing area in the additional comments section', 'RA'], ["Other - Please specify in additional comments.", "other"]])) |
+  %li
+    = label_tag 'cancel_form[comments]', "Additional Comments"
+    = text_area_tag 'cancel_form[comments]', @cancel_form[:comments], :size => "50x5"
+  %h3 SIUC Housing Policy
+  %p All single students under the age of 21, not residing with their parents or legal guardians, with fewer than 26 credit hours earned after High School are required to live in University-owned and operated residence halls. Exemptions to this policy will be administered and established by University Housing. If you cancel your housing contract, still plan to attend SIUC and are in violation of this policy, a hold will be placed on your account. The hold will prevent you from adding/dropping a class and/or registering for future semesters until such time as you comply with the policy. If you have questions regarding this policy, please contact University Housing.
+  %h3 Cancellation Charges
+  %p
+    %strong Spring 2011 Contract:
+    = succeed "Before" do
+      %br/
+    January 15, 2011: $150
+    = succeed "On" do
+      %br/
+    or after January 15, 2011 and the student has not accepted a room key: $500
+  %p
+    %strong 2011 Fall or 2011-2013 2-Year Edge Contract:
+    = succeed "Before" do
+      %br/
+    June 1, 2011: $150
+    %br/
+    June 1, 2011 - August 17, 2011: $250
+    %br/
+    After August 17, 2011 and the student has not accepted a room key: $500
+  %p
+    %strong 2010-2012 2-Year Edge Contract:
+    %br/
+    40% of the room charges for the remainder of the contract.
+  %li
+    = check_box_tag 'cancel_form[agreement]'
+    I have read and agree to the above policy and fees
+    %br/
+    = submit_tag 'Submit Cancellation'

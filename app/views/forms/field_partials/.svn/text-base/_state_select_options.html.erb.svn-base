@@ -1,0 +1,5 @@
+<% if @field_hash.nil? || @field_hash.empty? %>
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>
+<% else %>
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes', if @field_hash[:required_field] == 'Yes' then true end %>
+<% end %>

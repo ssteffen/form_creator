@@ -1,0 +1,14 @@
+<% if @field_hash.nil? || @field_hash.empty? || @field_hash[:text_field_size].nil? %>
+Size: <%= text_field_tag 'info[text_field_size]', nil, :size => 10, :maxlength => 15 %>&nbsp;
+Max Length: <%= text_field_tag 'info[text_field_max_size]', nil, :size => 5, :maxlength => 3 %>&nbsp;
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>&nbsp;
+Validation Type: <%= select_tag 'info[validation_type]', options_for_select([['Default (validate for blank if required field is checked)', "Default"], 'Email', 
+														'Phone Number', 'Zip Code', 'Dawgtag', 'Plain Characters(no numbers or special characters allowed)'] )%>
+<% else %>
+Size: <%= text_field_tag 'info[text_field_size]', @field_hash[:text_field_size], :size => 10, :maxlength => 15 %>&nbsp;
+Max Length: <%= text_field_tag 'info[text_field_max_size]', @field_hash[:text_field_max_size], :size => 5, :maxlength => 3 %>&nbsp;
+Required Field: <%= check_box_tag 'info[required_field]', 'Yes' %>
+Validation Type: <%= select_tag 'info[validation_type]', options_for_select([['Default (validate for blank if required field is checked)', "Default"], 'Email', 
+														'Phone Number', 'Zip Code', 'Dawgtag', ['Plain Characters(no numbers or special characters allowed)', 'Plain']],
+														@field_hash[:validation_type] )%>
+<% end %>

@@ -1,0 +1,23 @@
+- form_tag({:action => 'edit_field'}, {:class => 'hsgform'}) do
+	- field_set_tag 'Edit Field' do
+		%table
+			%tr
+				%td Name
+				%td Type
+			%tr
+				- if @field_hash.empty? 
+					%td= text_field_tag 'info[fields_name]'
+					%td= select_tag 'info[fields_type]', options_for_select([['Select One', ''], 'Text Field', 'Text Area', 'Check Box', 'Radio Button', 'Select Box', 'Numbered Select Box', 'Date Select', 'Time Select', 'DateTime Select', 'State Select', 'Country Select', 'Paragraph', 'Accept Terms']),:onchange => remote_function(:url => {:action => 'change_type'}, :with => "'type=' + value" )
+					%td
+						%ul
+							%li
+								#field_settings
+				- else 
+					%td= text_field_tag 'info[fields_name]', @field_hash[:fields_name]
+					%td= select_tag 'info[fields_type]', options_for_select([['Select One', ''], 'Text Field', 'Text Area', 'Check Box', 'Radio Button', 'Select Box', 'Numbered Select Box','Date Select', 'Time Select', 'DateTime Select', 'State Select', 'Country Select', 'Paragraph', "Accept Terms"], :selected => @field_hash[:fields_type]),:onchange => remote_function(:url => {:action => 'change_type'}, :with => "'type=' + value" )
+					%td
+						%ul
+							%li
+								#field_settings
+									= render(:partial => "forms/field_partials/" + @f.gsub(/ /, "_") + "_options.html.erb")
+	= submit_tag 'Save Field' 

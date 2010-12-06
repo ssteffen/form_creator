@@ -1,0 +1,26 @@
+- form_tag({:action => 'add_field'}, {:class => 'hsgform'}) do
+	-field_set_tag 'Add Field' do
+		%table
+			%tr
+				%td Name 
+				%td Type
+			%tr
+				- if @field_hash.nil? 
+					%td= text_field_tag 'info[fields_name]', nil
+					%td= select_tag 'info[fields_type]', options_for_select([['Select One', ''], 'Text Field', 'Text Area', 'Check Box', 'Radio Button', 'Select Box', 'Numbered Select Box','Date Select', 'Time Select', 'DateTime Select', 'State Select', 'Country Select', 'Paragraph', 'Accept_Terms'], @field_hash[:fields_type]), :onchange => remote_function(:url => {:action => 'change_type'}, :with => "'type=' + value" )
+					%td
+						%ul
+							%li
+								#field_settings
+
+				- else
+					%td= text_field_tag 'info[fields_name]', @field_hash[:fields_name]
+					%td= select_tag 'info[fields_type]', options_for_select([['Select One', ''], 'Text Field', 'Text Area', 'Check Box', 'Radio Button', 'Select Box', 'Numbered Select Box', 'Date Select', 'Time Select', 'DateTime Select', 'State Select', 'Country Select', 'Paragraph', 'Accept Terms'], @field_hash[:fields_type]), :onchange => remote_function(:url => {:action => 'change_type'}, :with => "'type=' + value" )
+					%td
+						%ul
+							%li
+								#field_settings
+		
+	= submit_tag 'Add Field' 
+
+= link_to "Back", :action => 'edit_fields'

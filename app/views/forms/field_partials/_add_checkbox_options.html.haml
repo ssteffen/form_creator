@@ -1,0 +1,9 @@
+- if @field_hash.nil? || @field_hash.empty?
+	%li{:id => 'list_' + session[:count].to_s}
+		= text_field_tag 'info[checkbox_options_' + session[:count].to_s + ']', nil, :size => 30, :maxlength => 65 
+		= link_to 'Remove Option', {:action => 'remove_checkbox_option', :id => session[:count]}, :remote => true, :id => 'remove_option_' + session[:count].to_s
+
+- else 
+	%li{:id=> 'list_' + @edit.to_s}
+		= text_field_tag 'info[checkbox_options_' + @edit.to_s + ']', @field_hash["checkbox_options_#{@edit.to_s}".to_sym], :size => 30, :maxlength => 65 
+		= link_to 'Remove Option',  {:action => 'remove_checkbox_option', :id => @edit}, :remote => true, :id => 'remove_option_' + @edit.to_s

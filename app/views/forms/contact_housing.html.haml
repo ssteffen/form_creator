@@ -1,0 +1,127 @@
+- content_for :jquery do
+	$("#country_perm").change(function()
+	{
+	if($("#country_perm").val() != "United States")
+	{
+	$("#state_perm").attr("disabled", true);
+	$("#zip_perm").attr("disabled",true);
+	}
+	else
+	{
+	$("#state_perm").attr("disabled", false);
+	$("#zip_perm").attr("disabled", false);
+	}
+	});
+  
+	$("#country_sc").change(function()
+	{
+	if($("#country_sc").val() != "United States")
+	{
+	$("#state_sc").attr("disabled", true);
+	$("#zip_sc").attr("disabled",true);
+	}
+	else
+	{
+	$("#state_sc").attr("disabled", false);
+	$("#zip_sc").attr("disabled", false);
+	}
+	});
+%h2.johndoe Contact Housing
+%h3 Mailing Address:
+%p
+	University Housing
+	%br/
+	Washington Square D - Mail Code 6716
+	%br/
+	Southern Illinois University Carbondale
+	%br/
+	707 South Washington
+	%br/
+	Carbondale, IL 62901
+%h3 Telephone:
+%p 618.453.2301
+%h3 Electronically
+- unless flash[:notice].blank?
+	%p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}= flash[:notice]
+	%br/
+- form_tag({:action => 'contact_housing'}, {:id => "hsgform", :class => "hsgform"}) do
+	%fieldset
+		%legend Personal Information
+		%ul
+			%li
+				%label{:for => "name"} *Your Name
+				= text_field_tag "contact_housing[name]", @contact_housing[:name], :size => 35, :maxlength => 65
+			%li
+				%label{:for => "email"} *Email
+				= text_field_tag "contact_housing[email]", @contact_housing[:email], :size => 35, :maxlength => 65
+		%fieldset
+			%legend Enrollment Status
+			%ul
+				%li
+					= radio_button_tag "contact_housing[enrollment]", '1', :checked => "checked"
+					I am currently a Student at SIUC
+				%li
+					= radio_button_tag "contact_housing[enrollment]", '2'
+					I am planning on attending SIUC in the
+					=select_tag("contact_housing[enrollment_semester]", options_for_select([['Fall'], ['Spring'], ['Summer']], @contact_housing[:enrollment_semester])) 
+					of
+					=select_year(Date.today, :field_name => "enrollment_year", :start_year => Time.now.strftime('%Y').to_i, :end_year => (Time.now.strftime('%Y').to_i + 5), :html_options => {:value => @contact_housing[:enrollment_year]})
+				%li
+					= radio_button_tag "contact_housing[enrollment]", '3'
+					I am currently not planning on attending SIUC or I am a parent of an SIUC student
+				%li
+					Year in School (if currently a student or are planning to attend)
+					=select_tag("contact_housing[enrollment_class]", options_for_select([['Freshman'], ['Sophomore'], ['Junior'], ['Senior'], ['Graduate/Professional']], @contact_housing[:enrollment_class]))
+		%fieldset
+			%legend Permanent Residence Contact Information
+			%ul
+				%li
+					%label{:for => "address_perm"} *Address
+					=text_field_tag "contact_housing[address_perm]", @contact_housing[:address_perm], :size => 35, :maxlength => 65
+				%li
+					%label{:for => "city_perm"} *City
+					=text_field_tag "contact_housing[city_perm]", @contact_housing[:city_perm], :size => 35, :maxlength => 65
+				%li
+					%label{:for => "state_perm"} *State
+					=select_tag("contact_housing[state_perm]", options_for_select(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "Washington D.C.", "West Virginia", "Wisconsin", "Wyoming"], "Illinois"), {:id => "state_perm"})
+					%label{:for => "zip_perm"} *Zip/Postal Code
+					=text_field_tag "contact_housing[zip_perm]", @contact_housing[:zip_perm], :size => 10, :maxlength => 10, :id => "zip_perm"
+				%li
+					%label{:for => "country_perm"} *Country
+					=select_tag("contact_housing[country_perm]", country_options_for_select("United States"), {:id => "country_perm"})
+				%li
+					%label{:for => "phone_perm"} Phone
+					=text_field_tag "contact_housing[phone_perm]", @contact_housing[:phone_perm], :size => 14, :maxlength => 14
+		%fieldset
+			%legend School Contact Information
+			%ul
+				%li
+					%label{:for => "address_sc"} Address
+					= text_field_tag "contact_housing[address_sc]", @contact_housing[:address_sc], :size => 35, :maxlength => 65
+				%li
+					%label{:for => "city_sc"} City
+					= text_field_tag "contact_housing[city_sc]", @contact_housing[:city_sc], :size => 35, :maxlength => 65
+				%li
+					%label{:for => "state_sc"} State
+					= select_tag "contact_housing[state_sc]", options_for_select(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "Washington D.C.", "West Virginia", "Wisconsin", "Wyoming"], "Illinois"), {:id => "state_sc"}
+					%label{:for => "zip_sc"} Zip/Postal Code
+					= text_field_tag "contact_housing[zip_sc]", @contact_housing[:zip_sc], :size => 10, :maxlength => 10, :id => "zip_sc"
+				%li
+					%label{:for => "country_sc"} Country
+					= select_tag("contact_housing[country_sc]", country_options_for_select("United States"), {:id => "country_sc"})
+				%li
+					%label{:for => "phone_sc"} Phone
+					= text_field_tag "contact_housing[phone_sc]", @contact_housing[:phone_sc], :size => 14, :maxlength => 14
+		%fieldset
+			%legend Additional Information
+			%ul
+				%li
+					%label{:for => "contact_preference"} Living Preference:
+					= select_tag("contact_housing[pref]", options_for_select([['Single Housing'], ['Apartments'], ['No Preference']], @contact_housing[:pref]))
+				%li
+					Comments/Questions/Suggestions:
+					%br
+					= text_area_tag "contact_housing[comments]", @contact_housing[:comments], :size => "30x10"
+	%p * Denotes required field
+	%br
+	= submit_tag "Send"

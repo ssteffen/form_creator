@@ -1,0 +1,5 @@
+<% if @field_hash.nil? || @field_hash.empty? || @field_hash[:date_select_format].nil?%>
+	Format: <%= select_tag 'info[date_select_format]', options_for_select([['mm/dd/yyyy'], 'Month dd, yyyy', 'mm/dd/yy', 'yyyy', 'mm/yyyy', 'Month', 'Day'])%>
+<% else %>
+	Format: <%= select_tag 'info[date_select_format]', options_for_select([['mm/dd/yyyy'], 'Month dd, yyyy', 'mm/dd/yy', 'yyyy', 'mm/yyyy', 'Month', 'Day'], @field_hash[:date_select_format])%>
+<% end %>
