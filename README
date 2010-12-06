@@ -1,0 +1,18 @@
+FormCreator
+===========
+
+FormCreator is an engine with an interface to quickly create simple forms. The plugin is separated into two models: forms and aforms.
+The forms model is the main model for the forms. The aforms is an extra model added in case the user needs to add a more complicated form,
+they can write it and FormCreator will include it in the list of available forms.
+
+The plugin's root is at http://{app}/forms. Here the application will show a list of the created forms and aforms, if there are any. 
+Available options include viewing the form for submission, editing the forms fields, editing the form details, and viewing all form submissions.
+
+Installation
+============
+Installation is simple, once you have the plugin in your plugin directory, run rake db:migrate:form_creator from your app root. This will generate the three tables that form_creator uses. Then you are good to go.
+
+Developed for Southern Illinois University Housing.
+
+
+Copyright (c) 2010 [name of plugin creator], released under the MIT license
