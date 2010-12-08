@@ -1,0 +1,332 @@
+%h2.johndoe Residence Hall Dining Employment Application
+%p Complete the application below and click "submit".
+
+- unless flash[:notice].blank? 
+	%p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}
+		= flash[:notice]
+	%br
+
+- form_tag({:action => 'dining_application'}, {:id => 'hsgform', :class => 'hsgform'}) do 
+	%fieldset
+		%legend Personal Information
+		%h3 Personal Information
+		%ul.label_align
+			%li
+				= label_tag 'first_name' 
+				= text_field_tag 'dining_application[first_name]', @dining_application[:first_name], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'last_name'
+				= text_field_tag 'dining_application[last_name]', @dining_application[:last_name], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'dawgtag'
+				= text_field_tag 'dining_application[dawgtag]', @dining_application[:dawgtag], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'birthdate'
+				= select_date Date.current, :prefix => 'dining_application', :order => [:month, :day, :year], :start_year => Date.current.year - 13, :end_year => Date.current.year - 75
+			%li
+				= label_tag 'campus_address' 
+				= text_field_tag 'dining_application[campus_address]', @dining_application[:campus_address], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'email'
+				= text_field_tag 'dining_application[email]', @dining_application[:email], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'confirm_email'
+				= text_field_tag 'dining_application[confirm_email]', @dining_application[:confirm_email], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'local_phone'
+				= text_field_tag 'dining_application[local_phone]', @dining_application[:local_phone], :size => 15, :maxlength => 15
+			%li
+				= label_tag 'home_phone'
+				= text_field_tag 'dining_application[home_phone]', @dining_application[:home_phone], :size => 15, :maxlength => 15
+			%li
+				%strong Home Address
+			%li
+				= label_tag 'street'
+				= text_field_tag 'dining_application[street]', @dining_application[:street], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'city'
+				= text_field_tag 'dining_application[city]', @dining_application[:city], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'state'
+				= select_tag 'dining_application[state]', options_for_select(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "Washington D.C.", "West Virginia", "Wisconsin", "Wyoming"], "Illinois")
+			%li
+				= label_tag 'zip' 
+				= text_field_tag 'dining_application[zip]', @dining_application[:zip], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'country'
+				= select_tag 'dining_application[country]', country_options_for_select("United States")
+	%fieldset
+		%legend Housing Employment
+		%ul.label_align
+			%li
+				= label_tag 'employed_before', "Have you ever been employed by University Housing?"
+				= radio_button_tag 'dining_application[employed_before]', 'Yes'
+				\- Yes 
+				= radio_button_tag 'dining_application[employed_before]', 'No' 
+				\- No
+			%li
+				If yes, please answer the following questions.
+			%li
+				%table.table
+					%tr
+						%td= label_tag 'position'
+						%td= text_field_tag 'dining_application[position]', @dining_application[:position], :size => 30, :maxlength => 65
+					%tr
+						%td= label_tag 'employment_period', "Employment Period (mm/dd/yyyy)"
+						%td
+							From
+							= text_field_tag 'dining_application[employment_start]', @dining_application[:employment_start], :size => 10, :maxlength => 12 
+							to 
+							= text_field_tag 'dining_application[employment_end]', @dining_application[:employment_end], :size => 10, :maxlength => 12
+					%tr
+						%td= label_tag 'employment_building', 'Building you worked in'
+						%td= text_field_tag 'dining_application[employment_building]', @dining_application[:employment_building], :size => 30, :maxlength => 65 
+					%tr
+						%td= label_tag 'supervisor'
+						%td= text_field_tag 'dining_application[supervisor]', @dining_application[:supervisor], :size => 30, :maxlength => 65 
+					%tr
+						%td= label_tag 'current_status', "Select one of the following options"
+						%td
+							= radio_button_tag 'dining_application[current_status]', "I Still Work for University Housing", if @dining_application[:current_status] == "I Still Work for University Housing" then true else false end
+							\- I still work for University Housing
+							= radio_button_tag 'dining_application[current_status]', 'I was terminated', if @dining_application[:current_status] == "I was terminated" then true else false end 
+							\- I was terminated
+							= radio_button_tag 'dining_application[current_status]', 'I quit', if @dining_application[:current_status] == "I quit" then true else false end 
+							\- I quit
+							= radio_button_tag 'dining_application[current_status]', 'Other', if @dining_application[:current_status] == "Other" then true else false end 
+							\- Other
+					%tr
+						%td= label_tag 'status_explanation', "Explain"
+						%td= text_area_tag 'dining_application[status_explanation]', @dining_application[:status_explanation], :size => "30x10"
+	%fieldset
+		%legend>Availability
+		%p Please select the hours you would be <strong>available to work</strong>. Hold down the control or command key to select multiple hours in the day.
+		%table
+			%tr
+				%th Monday
+				%th Tuesday
+				%th Wednesday
+				%th Thursday
+				%th Friday
+			%tr
+				%td= select_tag 'dining_application[mon_avail]', options_for_select(@availability_hours), :multiple => true 
+				%td= select_tag 'dining_application[tue_avail]', options_for_select(@availability_hours), :multiple => true 
+				%td= select_tag 'dining_application[wed_avail]', options_for_select(@availability_hours), :multiple => true 
+				%td= select_tag 'dining_application[thu_avail]', options_for_select(@availability_hours), :multiple => true
+				%td= select_tag 'dining_application[fri_avail]', options_for_select(@availability_hours), :multiple => true
+	%fieldset
+		%legend Job Experience and Employment References
+		%ul
+			%li
+				%strong
+					Most Recent Position
+			%li
+				= label_tag 'first_position', "Position" 
+				= text_field_tag 'dining_application[first_position]', @dining_application[:first_position], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'first_work_type', "Type of Work"
+				= text_field_tag 'dining_application[first_work_type]', @dining_application[:first_work_type], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'first_employer', "Employer"
+				= text_field_tag 'dining_application[first_employer]', @dining_application[:first_employer], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'first_address', 'Address'
+				= text_field_tag 'dining_application[first_address]', @dining_application[:first_address], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'first_phone', "Phone Number"
+				= text_field_tag 'dining_application[first_phone]', @dining_application[:first_phone], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'first_supervisor', "Supervisor"
+				= text_field_tag 'dining_application[first_supervisor]', @dining_application[:first_supervisor], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'first_employment_period', "Employment Period"
+				From 
+				= text_field_tag "dining_application[first_employ_start]", @dining_application[:first_employ_start], :size => 10, :maxlength => 11 
+				to 
+				= text_field_tag "dining_application[first_employ_end]", @dining_application[:first_employ_end], :size => 10, :maxlength => 11
+			%li
+				= label_tag 'first_reason', "Reason for Leaving"
+				= text_area_tag 'dining_application[first_reason]', @dining_application[:first_reason], :size => "30x10" 
+		%ul
+			%li
+				%strong Next Most Recent Position
+			%li
+				= label_tag 'second_position', "Position"
+				= text_field_tag 'dining_application[second_position]', @dining_application[:second_position], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'second_work_type', "Type of Work"
+				= text_field_tag 'dining_application[second_work_type]', @dining_application[:second_work_type], :size => 30, :maxlength => 65 
+		
+			%li
+				= label_tag 'second_employer', "Employer"
+				= text_field_tag 'dining_application[second_employer]', @dining_application[:second_employer], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'second_address', 'Address'
+				= text_field_tag 'dining_application[second_address]', @dining_application[:second_address], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'second_phone', "Phone Number" 
+				= text_field_tag 'dining_application[second_phone]', @dining_application[:second_phone], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'second_supervisor', "Supervisor"
+				= text_field_tag 'dining_application[second_supervisor]', @dining_application[:second_supervisor], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'second_employment_period', "Employment Period"
+				From 
+				= text_field_tag "dining_application[second_employ_start]", @dining_application[:second_employ_start], :size => 10, :maxlength => 11 
+				to 
+				= text_field_tag "dining_application[second_employ_end]", @dining_application[:second_employ_end], :size => 10, :maxlength => 11 
+			%li
+				= label_tag 'second_reason', "Reason for Leaving"
+				= text_area_tag 'dining_application[second_reason]', @dining_application[:second_reason], :size => "30x10" 
+		%ul
+			%li
+				%strong Additional Position
+			%li
+				= label_tag 'third_position', "Position"
+				= text_field_tag 'dining_application[third_position]', @dining_application[:third_position], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'third_work_type', "Type of Work"
+				= text_field_tag 'dining_application[third_work_type]', @dining_application[:third_work_type], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'third_employer', "Employer"
+				= text_field_tag 'dining_application[third_employer]', @dining_application[:third_employer], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'third_address', 'Address'
+				= text_field_tag 'dining_application[third_address]', @dining_application[:third_address], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'third_phone', "Phone Number" 
+				= text_field_tag 'dining_application[third_phone]', @dining_application[:third_phone], :size => 30, :maxlength => 65 
+			%li
+				= label_tag 'third_supervisor', "Supervisor"
+				= text_field_tag 'dining_application[third_supervisor]', @dining_application[:third_supervisor], :size => 30, :maxlength => 65
+			%li
+				= label_tag 'third_employment_period', "Employment Period"
+				From 
+				= text_field_tag "dining_application[third_employ_start]", @dining_application[:third_employ_start], :size => 10, :maxlength => 11
+				to 
+				= text_field_tag "dining_application[third_employ_end]", @dining_application[:third_employ_end], :size => 10, :maxlength => 11 
+			%li
+				= label_tag 'third_reason', "Reason for Leaving"
+				= text_area_tag 'dining_application[third_reason]', @dining_application[:third_reason], :size => "30x10"
+	%fieldset
+		%legend Skills & Experience
+		%ul
+			%li
+				%strong Job Skills:
+				(Check all in which you are proficient)
+			%li
+				%table.table
+					%tr
+						%td
+							= check_box_tag 'dining_application[typing]', "Typing", if @dining_application[:typing] == "Typing" then true else false end 
+							Typing (wpm: 
+							= text_field_tag 'dining_application[wpm]', @dining_application[:wpm], :size => 3, :maxlength => 3
+							)
+						%td
+							= check_box_tag 'dining_application[calculator]', "Calculator", if @dining_application[:calculator] == "Calculator" then true else false end 
+							Calculator
+					%tr
+						%td
+							= check_box_tag 'dining_application[cash]', "Cash Register", if @dining_application[:cash] == "Cash Register" then true else false end 
+							Cash Register/Cash Handling 
+						%td
+							= check_box_tag 'dining_application[reception]', "Receptionist", if @dining_application[:reception] == "Receptionist" then true else false end 
+							Receptionist
+					
+			%li
+				%strong Computer Skills: 
+				(Check all that apply)
+			%li
+				%table.table
+					%tr
+						%td
+							= check_box_tag 'dining_application[excel]', "Excel", if @dining_application[:excel] == "Excel" then true else false end 
+							Excel
+						%td
+							= check_box_tag 'dining_application[photoshop]', "Photoshop", if @dining_application[:photoshop] == "Photoshop" then true else false end 
+							Photoshop
+						%td
+							= check_box_tag 'dining_application[word]', "Word", if @dining_application[:word] == "Word" then true else false end
+							Word
+						%td
+							= check_box_tag 'dining_application[publisher]', "Publisher", if @dining_application[:publisher] == "Publisher" then true else false end
+							Publisher
+					%tr
+						%td
+							= check_box_tag 'dining_application[illustrator]', "Illustrator", if @dining_application[:illustrator] == "Illustrator" then true else false end 
+							Illustrator
+						%td
+							= check_box_tag 'dining_application[pagemaker]', "Pagemaker", if @dining_application[:pagemaker] == "Pagemaker" then true else false end 
+							Pagemaker
+						%td
+							= check_box_tag 'dining_application[quark]', "Quark", if @dining_application[:quark] == "Quark" then true else false end 
+							Quark
+						%td
+							= check_box_tag 'dining_application[indesign]', "InDesign", if @dining_application[:indesign] == "InDesign" then true else false end 
+							InDesign
+					%tr
+						%td
+							= check_box_tag 'dining_application[powerpoint]', "Power Point", if @dining_application[:powerpoint] == "Power Point" then true else false end 
+							Power Point
+					
+						%td{:colspan=>"3"}
+							Other: 
+							= text_field_tag 'dining_application[other]', @dining_application[:other], :size => 15, :maxlength => 65
+			%li
+				%strong Art Skills: 
+				(Check all that apply)
+			%li
+				%table.table
+					%tr
+						%td
+							= check_box_tag 'dining_application[calligraphy]', "Calligraphy", if @dining_application[:calligraphy] == "Calligraphy" then true else false end 
+							Calligraphy
+						%td
+							= check_box_tag 'dining_application[advertising]', "Advertising", if @dining_application[:advertising] == "Advertising" then true else false end
+							Advertising
+						%td
+							= check_box_tag 'dining_application[graphics]', "Graphics", if @dining_application[:graphics] == "Graphics" then true else false end 
+							Graphics
+	%fieldset
+		%legend Areas of Interest
+		%ul
+			%li Check all that apply
+			%li
+				%table.table
+					%tr
+						%td
+							= check_box_tag 'dining_application[marketing]', "Marketing", if @dining_application[:marketing] == "Marketing" then true else false end 		
+							Marketing
+						%td
+							= check_box_tag 'dining_application[trueblood_dining]', "Trueblood Dining", if @dining_application[:trueblood_dining] == "Trueblood Dining" then true else false end  
+							Trueblood Dining
+					
+						%td
+							= check_box_tag 'dining_application[eastside_express]', "Eastside Express", if @dining_application[:eastside_express] == "Eastside Express" then true else false end 
+							Eastside Express
+					%tr
+						%td
+							= check_box_tag 'dining_application[university_hall_dining]', "University Hall Dining", if @dining_application[:university_hall_dining] == "University Hall Dining" then true else false end 
+							University Hall Dining	
+						%td{:colspan => "2"}
+							= check_box_tag 'dining_application[lentz_dining]', "Lentz Dining", if @dining_application[:lentz_dining] == "Lentz Dining" then true else false end 
+							Lentz Dining
+					
+	%fieldset
+		%legend Additional Comments
+		%ul
+			%li What would you like us to know about you?
+			%li= text_area_tag 'dining_application[add_know]', @dining_application[:add_know], :size => '30x10'
+			%li Additional Questions/Comments?
+			%li= text_area_tag 'dining_application[comments]', @dining_application[:comments], :size => '30x10'
+	%fieldset
+	%legend
+		Submit Application
+	%p
+		I understand that by omission or falsification of any portion of this application, I may be terminated from employment or removed from consideration as an employee. 
+		By checking “I agree to the above statement” below gives University Housing of Southern Illinois University Carbondale permission to check into my personal background 
+		and any other information that I provide on my application. I understand that any personal information will be kept confidential.
+	%p
+		= check_box_tag 'dining_application[agree]', "1"  
+		I agree to the above statement
+	= submit_tag 'Submit Application'

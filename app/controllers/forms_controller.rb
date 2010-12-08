@@ -636,7 +636,7 @@ class FormsController < ApplicationController
         response = FormSubmission.new(:response => yaml_string, :form_id => @form.id)
         if response.save
           unless @form.email_notification_address.blank?
-            Notifier.deliver_new_forms_notification(@form, response.id)
+            FormMailer.new_forms_notification(@form, response.id).deliver
           end
           flash[:notice] << [@form.success_message + "<br />"]
         else
@@ -701,7 +701,8 @@ class FormsController < ApplicationController
       check_agree(@dining_application, :agree)
       if flash[:notice].empty?
         yaml_response = @dining_application.to_yaml
-        response = FormSubmission.new(:a_form_id => 1, :response => yaml_response)
+        form = Aform.find(:first, :conditions => {:stub => "dining_application"})
+        response = FormSubmission.new(:a_form_id => form.id, :response => yaml_response)
         if response.save
           flash[:notice] = "Thank you for submitting an application for employment at University Housing. 
                             You will be contacted by University Housing staff when your application has been reviewed."
@@ -713,7 +714,7 @@ class FormsController < ApplicationController
             form.field_order = @order.to_yaml
             form.save
           end
-          Notifier.deliver_new_forms_alt_notification(form, response.id, "fooddine@siu.edu")
+          FormMailer.new_forms_alt_notification(form, response.id, "fooddine@siu.edu").deliver
         else
           flash[:notice] = "There was an error submitting your application. Please try again later."
         end
@@ -785,7 +786,8 @@ class FormsController < ApplicationController
        check_agree(@apartment_application, :agreement)
        if flash[:notice].empty?
          yaml_response = @apartment_application.to_yaml
-         response = FormSubmission.new(:a_form_id => 2, :response => yaml_response)
+         form = Aform.find(:first, :conditions => {:stub => "apartment_application"})
+         response = FormSubmission.new(:a_form_id => (Aform.where(:stub => "apartment_application")).id, :response => yaml_response)
          if response.save
            flash[:notice] = "Thank you for submitting your application to University Housing Apartments.<br />  
                              Please be sure to check the information at the end of the page for information on when your application will be processed."
@@ -796,7 +798,7 @@ class FormsController < ApplicationController
              form.field_order = @order.to_yaml
              form.save
            end
-           Notifier.deliver_new_forms_alt_notification(form, response.id, "housing@siu.edu")
+           FormMailer.new_forms_alt_notification(form, response.id, "housing@siu.edu").deliver
          else
            flash[:notice] = "There was an error submitting your application. Please try again later."
          end
@@ -916,7 +918,7 @@ class FormsController < ApplicationController
                 form.field_order = @order.to_yaml
                 form.save
               end
-              Notifier.deliver_new_forms_alt_notification(form, response.id, "housing@siu.edu")
+             FormMailer.new_forms_alt_notification(form, response.id, "housing@siu.edu").deliver
             else
               flash[:notice] = "There was an error submitting your cancellation form. Please try again later."
             end

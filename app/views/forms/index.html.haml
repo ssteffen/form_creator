@@ -37,9 +37,10 @@
 		%th View Form
 		%th View Submissions
 	-@aforms.each do |aform|
-		%td= aform.title
-		%td= aform.stub
-		%td= link_to "View Form", {:action => aform.stub, :id => 0}
-		%td= link_to "View Submissions", {:action => "alt_submissions", :id => aform.id}
+		%tr
+			%td= aform.title
+			%td= aform.stub
+			%td= link_to "View Form", {:action => aform.stub, :id => 0}
+			%td= link_to "View Submissions", {:action => "alt_submissions", :id => aform.id}
 
 
