@@ -815,16 +815,16 @@ class FormsController < ApplicationController
      @order = ["name", "cancel_for", "status", "type", "email", "dawgtag", "room", "reason", "comments"]
      current_date = Time.now
      cancel_for = 0
-     next_year = current_date.next_year
-     begin_fall = Time.parse('11/10/' + (current_date.year - 1).to_s).at_midnight
-     end_fall = Time.parse('8/20/' + current_date.year.to_s).tomorrow - 1
-     begin_spring = Time.parse('10/1/' + current_date.year.to_s).at_midnight
-     end_spring = Time.parse('1/12/' + (current_date.year + 1).to_s).tomorrow - 1
+     #next_year = current_date.next_year
+     #begin_fall = Time.parse('11/10/' + (current_date.year - 1).to_s).at_midnight
+     #end_fall = (Time.parse('8/20/' + current_date.year.to_s).end_of_day)
+     #begin_spring = Time.parse('10/1/' + current_date.year.to_s).at_midnight
+     #end_spring = Time.parse('1/12/' + (current_date.year + 1).to_s).tomorrow - 1
 
      #set up time objects for @cancel_form[:cancel_for] radio buttons
-     start_fall = Time.parse('8/20/' + current_date.year.to_s).at_midnight
-     start_spring = Time.parse('11/9/' + current_date.year.to_s).at_midnight
-     start_summer = Time.parse('5/8/' + current_date.year.to_s).at_midnight
+     start_fall = Time.parse('20/8/' + current_date.year.to_s).at_midnight
+     start_spring = Time.parse('9/11/' + current_date.year.to_s).at_midnight
+     start_summer = Time.parse('8/5/' + current_date.year.to_s).at_midnight
 
 
      @fall = false
@@ -833,11 +833,11 @@ class FormsController < ApplicationController
 
      #Check availability of page
      ip = request.remote_ip  
-     if (current_date >= begin_fall && current_date <= end_fall)
-       cancel_for = 1
-     elsif (current_date >= begin_spring && current_date <= end_spring)
-       cancel_for = 1
-     end
+     #if (current_date >= begin_fall && current_date <= end_fall)
+    #   cancel_for = 1
+     #elsif (current_date >= begin_spring && current_date <= end_spring)
+      # cancel_for = 1
+     #end
      #if (!(current_date <= end_fall && current_date >= begin_fall) || !(current_date <= end_spring && current_date >= begin_spring)) 
      #if (cancel_for == 0)
      #  if (ip != '131.230.19.56' )

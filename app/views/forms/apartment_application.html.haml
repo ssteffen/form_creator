@@ -1,510 +1,503 @@
 - content_for :jquery do
-  $("#country").change(function()
-  {
-  if($("#country").val() != "United States")
-  {
-  $("#state").attr("disabled", true);
-  $("#apartment_application_zip").attr("disabled", true);
-  }
-  else
-  {
-  $("#state").attr("disabled", false);
-  $("#apartment_application_zip").attr("disabled", false);
-  }
-  });
+	$("#country").change(function()
+	{
+	if($("#country").val() != "United States")
+	{
+	$("#state").attr("disabled", true);
+	$("#apartment_application_zip").attr("disabled", true);
+	}
+	else
+	{
+	$("#state").attr("disabled", false);
+	$("#apartment_application_zip").attr("disabled", false);
+	}
+	});
   
-  \//---------------------------------------//
-  \//---------STUDENT_STATUS JQUERY---------//
-  \//---------------------------------------//
-  function disable_student_status(bool1, bool2){
-  $("#law").attr("disabled", bool1);
-  $("#med").attr("disabled", bool1);
-  $("#other").attr("disabled", bool1);
-  $("#department").attr("disabled", bool2);
-  }
+	//---------------------------------------//
+	//---------STUDENT_STATUS JQUERY---------//
+	//---------------------------------------//
+	function disable_student_status(bool1, bool2){
+	$("#law").attr("disabled", bool1);
+	$("#med").attr("disabled", bool1);
+	$("#other").attr("disabled", bool1);
+	$("#department").attr("disabled", bool2);
+	}
   
-  disable_student_status(true, true);
-  if ($("#student_status_under").attr("checked") == true){
-  disable_student_status(true, true);
-  }
-  if ($("#student_status_grad").attr("checked") == true){
-  disable_student_status(false, true);
-  }
-  if ($("#student_status_ga").attr("checked") == true){
-  disable_student_status(false, true);
-  }
-  if ($("#student_status_fac").attr("checked") == true){
-  disable_student_status(true, false);
-  }
-  $("#student_status_under").change(function()
-  {
-  \//alert("undergrad");
-  if ($("#student_status_under").attr("checked") == true){
-  disable_student_status(true, true);
-  }
-  });
-  $("#student_status_grad").change(function()
-  {
-  if ($("#student_status_grad").attr("checked") == true){
-  disable_student_status(false, true);
-  }
-  });
-  $("#student_status_ga").change(function()
-  {
-  if ($("#student_status_ga").attr("checked") == true){
-  disable_student_status(false, true);
-  }
-  });
-  $("#student_status_fac").change(function()
-  {
-  if ($("#student_status_fac").attr("checked") == true){
-  disable_student_status(true, false);
-  }
-  });
+	disable_student_status(true, true);
+	if ($("#student_status_under").attr("checked") == true){
+	disable_student_status(true, true);
+	}
+	if ($("#student_status_grad").attr("checked") == true){
+	disable_student_status(false, true);
+	}
+	if ($("#student_status_ga").attr("checked") == true){
+	disable_student_status(false, true);
+	}
+	if ($("#student_status_fac").attr("checked") == true){
+	disable_student_status(true, false);
+	}
+	$("#student_status_under").change(function()
+	{
+	//alert("undergrad");
+	if ($("#student_status_under").attr("checked") == true){
+	disable_student_status(true, true);
+	}
+	});
+	$("#student_status_grad").change(function()
+	{
+	if ($("#student_status_grad").attr("checked") == true){
+	disable_student_status(false, true);
+	}
+	});
+	$("#student_status_ga").change(function()
+	{
+	if ($("#student_status_ga").attr("checked") == true){
+	disable_student_status(false, true);
+	}
+	});
+	$("#student_status_fac").change(function()
+	{
+	if ($("#student_status_fac").attr("checked") == true){
+	disable_student_status(true, false);
+	}
+	});
   
-  \//---------------------------------------//
-  \//----MARITAL_STATUS + SPOUSE JQUERY-----//
-  \//---------------------------------------//
-  function disable_engagement(bool1, bool2){
-  $("#wedding_date_month").attr("disabled", bool1);
-  $("#wedding_date_day").attr("disabled", bool1);
-  $("#wedding_date_year").attr("disabled", bool1);
-  $("#sp_first_name").attr("disabled", bool2);
-  $("#sp_last_name").attr("disabled", bool2);
-  $("#sp_init").attr("disabled", bool2);
-  $("#sp_id").attr("disabled", bool2);
-  $("#sp_stat_yes").attr("disabled", bool2);
-  $("#sp_stat_no").attr("disabled", bool2);
-  $("#sp_gender_male").attr("disabled", bool2);
-  $("#sp_gender_female").attr("disabled", bool2);
-  $("#spouse_birthday_month").attr("disabled", bool2);
-  $("#spouse_birthday_day").attr("disabled", bool2);
-  $("#spouse_birthday_year").attr("disabled", bool2);
-  }
+	//---------------------------------------//
+	//----MARITAL_STATUS + SPOUSE JQUERY-----//
+	//---------------------------------------//
+	function disable_engagement(bool1, bool2){
+	$("#wedding_date_month").attr("disabled", bool1);
+	$("#wedding_date_day").attr("disabled", bool1);
+	$("#wedding_date_year").attr("disabled", bool1);
+	$("#sp_first_name").attr("disabled", bool2);
+	$("#sp_last_name").attr("disabled", bool2);
+	$("#sp_init").attr("disabled", bool2);
+	$("#sp_id").attr("disabled", bool2);
+	$("#sp_stat_yes").attr("disabled", bool2);
+	$("#sp_stat_no").attr("disabled", bool2);
+	$("#sp_gender_male").attr("disabled", bool2);
+	$("#sp_gender_female").attr("disabled", bool2);
+	$("#spouse_birthday_month").attr("disabled", bool2);
+	$("#spouse_birthday_day").attr("disabled", bool2);
+	$("#spouse_birthday_year").attr("disabled", bool2);
+	}
   
-  disable_engagement(true, true);
-  if ($("#marital_status_sing").attr("checked") == true)
-  disable_engagement(true, true);
-  if ($("#marital_status_marr").attr("checked") == true)
-  disable_engagement(true, false);
-  if ($("#marital_status_dom").attr("checked") == true)
-  disable_engagement(true, false);
-  if ($("#marital_status_eng").attr("checked") == true)
-  disable_engagement(false, false);
-  $("#marital_status_sing").change(function()
-  {
-  if ($("#marital_status_sing").attr("checked") == true)
-  disable_engagement(true, true);
-  });
-  $("#marital_status_marr").change(function()
-  {
-  if ($("#marital_status_marr").attr("checked") == true)
-  disable_engagement(true, false);
-  });
-  $("#marital_status_dom").change(function()
-  {
-  if ($("#marital_status_dom").attr("checked") == true)
-  disable_engagement(true, false);
-  });
-  $("#marital_status_eng").change(function()
-  {
-  if ($("#marital_status_eng").attr("checked") == true)
-  disable_engagement(false, false);
-  });
+	disable_engagement(true, true);
+	if ($("#marital_status_sing").attr("checked") == true)
+	disable_engagement(true, true);
+	if ($("#marital_status_marr").attr("checked") == true)
+	disable_engagement(true, false);
+	if ($("#marital_status_dom").attr("checked") == true)
+	disable_engagement(true, false);
+	if ($("#marital_status_eng").attr("checked") == true)
+	disable_engagement(false, false);
+	$("#marital_status_sing").change(function()
+	{
+	if ($("#marital_status_sing").attr("checked") == true)
+	disable_engagement(true, true);
+	});
+	$("#marital_status_marr").change(function()
+	{
+	if ($("#marital_status_marr").attr("checked") == true)
+	disable_engagement(true, false);
+	});
+	$("#marital_status_dom").change(function()
+	{
+	if ($("#marital_status_dom").attr("checked") == true)
+	disable_engagement(true, false);
+	});
+	$("#marital_status_eng").change(function()
+	{
+	if ($("#marital_status_eng").attr("checked") == true)
+	disable_engagement(false, false);
+	});
   
-  \//---------------------------------------//
-  \//-----------Child Info JQUERY-----------//
-  \//---------------------------------------//
-  function set_child(which, bool)
-  {
-  $("#child_name_" + which).attr("disabled", bool);
-  $("#child_bdate_" + which).attr("disabled", bool);
-  $("#child_gender_" + which + "_m").attr("disabled", bool);
-  $("#child_gender_" + which + "_f").attr("disabled", bool);
-  }
-  function toggle_children(no_children)
-  {
-  
-  if (no_children == "1"){
-  set_child("1", false);
-  set_child("2", true);
-  set_child("3", true);
-  set_child("4", true);
-  }
-  else if (no_children == "2"){
-  set_child("1", false);
-  set_child("2", false);
-  set_child("3", true);
-  set_child("4", true);
-  }
-  else if (no_children == "3"){
-  set_child("1", false);
-  set_child("2", false);
-  set_child("3", false);
-  set_child("4", true);
-  }
-  else if (no_children == "4"){
-  set_child("1", false);
-  set_child("2", false);
-  set_child("3", false);
-  set_child("4", false);
-  }
-  else {
-  set_child("1", true);
-  set_child("2", true);
-  set_child("3", true);
-  set_child("4", true);
-  }
-  }
-  toggle_children($("#no_children").val());
-  $("#no_children").change(function()
-  {
-  toggle_children($("#no_children").val());
-  })
+	//---------------------------------------//
+	//-----------Child Info JQUERY-----------//
+	//---------------------------------------//
+	function set_child(which, bool)
+	{
+	$("#child_name_" + which).attr("disabled", bool);
+	$("#child_bdate_" + which).attr("disabled", bool);
+	$("#child_gender_" + which + "_m").attr("disabled", bool);
+	$("#child_gender_" + which + "_f").attr("disabled", bool);
+	}
+	function toggle_children(no_children)
+	{
+	if (no_children == "1"){
+	set_child("1", false);
+	set_child("2", true);
+	set_child("3", true);
+	set_child("4", true);
+	}
+	else if (no_children == "2"){
+	set_child("1", false);
+	set_child("2", false);
+	set_child("3", true);
+	set_child("4", true);
+	}
+	else if (no_children == "3"){
+	set_child("1", false);
+	set_child("2", false);
+	set_child("3", false);
+	set_child("4", true);
+	}
+	else if (no_children == "4"){
+	set_child("1", false);
+	set_child("2", false);
+	set_child("3", false);
+	set_child("4", false);
+	}
+	else {
+	set_child("1", true);
+	set_child("2", true);
+	set_child("3", true);
+	set_child("4", true);
+	}
+	}
+	toggle_children($("#no_children").val());
+	$("#no_children").change(function()
+	{
+	toggle_children($("#no_children").val());
+	})
 #entryText
-  %h2.johndoe Application for University Housing Apartments
-  %p
-    Complete and submit the following form to apply for University Housing apartments. Please refer to the
-    %a{:href => "http://housing.siu.edu/apartments/eligibility-requirements-restrictions", :title => "Apartment Eligibility, Requirements and Restrictions"} Eligibility Sections
-    of the website prior to selecting an area.
-  - unless flash[:notice].blank?
-    %p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}= flash[:notice]
-    %br/
-  - form_tag({:action => 'apartment_application', :protocol => 'https://', :only_path => false}, {:id => "hsgform", :class => "hsgform"}) do
-    %fieldset
-      %legend Application Term
-      %p
-        Year: #{select_tag ('apartment_application[year]', options_for_select([[Time.now.year.to_s], [(Time.now.year + 1).to_s], [(Time.now.year + 2).to_s]], @apartment_application[:year]))}
-        Beginning Semester Occupancy Desired: #{radio_button_tag ('apartment_application[semester]', 'Fall')} Fall
-        \#{radio_button_tag ('apartment_application[semester]', 'Spring')} Spring #{radio_button_tag ('apartment_application[semester]', 'Summer')} Summer
-    %fieldset
-      %legend Contact Information
-      %ul
-        %li
-          = label_tag 'Last Name'
-          = text_field_tag 'apartment_application[last_name]', @apartment_application[:last_name], :size => 35, :maxlength => 65
-        %li
-          = label_tag 'First Name'
-          = text_field_tag 'apartment_application[first_name]', @apartment_application[:first_name], :size => 35, :maxlength => 65
-        %li
-          = label_tag 'Middle Initial'
-          = text_field_tag 'apartment_application[middle_initial]',@apartment_application[:middle_initial],:size => 35,:maxlength => 65
-    %fieldset
-      %legend Mailing Address
-      %ul
-        %li
-          = label_tag 'Street Address'
-          = text_field_tag 'apartment_application[street]',@apartment_application[:street], :size => 35, :maxlength => 65
-        %li
-          = label_tag 'City'
-          = text_field_tag 'apartment_application[city]', @apartment_application[:city], :size => 35, :maxlength => 65
-        %li
-          = label_tag 'State'
-          = select_tag 'apartment_application[state]', state_options_for_select(selected = "Illinois", country = "US"), {:id => "state"}
-        %li
-          = label_tag 'Country'
-          = select_tag 'apartment_application[country]', country_options_for_select("United States", ["United States"]), {:id => "country"}
-        %li
-          = label_tag 'Zip'
-          = text_field_tag 'apartment_application[zip]', @apartment_application[:zip], :size => 10, :maxlength => 10
-      %ul
-        %li
-          = label_tag 'Home Phone'
-          = text_field_tag 'apartment_application[home_phone]', @apartment_application[:home_phone], :size => 14, :maxlength => 14
-        %li
-          = label_tag 'Contact Phone'
-          = text_field_tag 'apartment_application[contact_phone]',@apartment_application[:contact_phone], :size => 14, :maxlength => 14
-        %li
-          = label_tag 'Email Address'
-          = text_field_tag 'apartment_application[email]', @apartment_application[:email], :size => 30, :maxlength => 65
-        %li
-          = label_tag 'Dawgtag/SS#'
-          = text_field_tag 'apartment_application[dawgtag]', @apartment_application[:dawgtag], :size => 9, :maxlength => 9
-        %li
-          = label_tag 'Birthdate'
-          = text_field_tag 'apartment_application[birthdate]', @apartment_application[:birthdate], :size => 10, :maxlength => 10
-          (MM/DD/YYYY)
-        %li
-          = label_tag 'Gender'
-          = radio_button_tag 'apartment_application[gender]', 'Male',                                                     |
-            if @apartment_application[:gender] == "Male" || @apartment_application[:gender].nil? then true else false end |
-          Male &nbsp;
-          \#{radio_button_tag 'apartment_application[gender]', 'Female', if @apartment_application[:gender] == "Female" then true else false end} Female
-    %fieldset
-      %legend Student Status
-      %ul
-        %li
-          = radio_button_tag 'apartment_application[student_status]', 'Undergraduate',                                                              |
-            if @apartment_application[:student_status] == "Undergraduate" || @apartment_application[:student_status].nil? then true else false end, |
-            {:id => "student_status_under"}                                                                                                         |
-          Undergraduate
-        %li
-          = radio_button_tag 'apartment_application[student_status]','Graduate',                                              |
-            if @apartment_application[:student_status] == "Graduate" then true else false end, {:id => "student_status_grad"} |
-          Graduate #{check_box_tag 'apartment_application[law]', 'Law', if @apartment_application[:law] == "Law" then true else false end, :id => "law"}
-          Law &nbsp; #{check_box_tag 'apartment_application[med]', 'Medical', if @apartment_application[:med] == "Medical" then true else false end, :id => "med"} Med &nbsp;
-          \#{check_box_tag 'apartment_application[other]', 'Other', if @apartment_application[:other] == "Other" then true else false end, :id => "other"} Other
-        %li
-          = radio_button_tag 'apartment_application[student_status]', 'Graduate Assistant',                                           |
-            if @apartment_application[:student_status] == "Graduate Assistant" then true else false end, {:id => "student_status_ga"} |
-          Graduate Assistant
-        %li
-          = radio_button_tag 'apartment_application[student_status]', 'Faculty',                                            |
-            if @apartment_application[:student_status] == "Faculty" then true else false end, {:id => "student_status_fac"} |
-          -#
-          Faculty:
-          \#{text_field_tag 'apartment_application[department]', @apartment_application[:department],  :id => "department", :size => 20, :maxlength => 32, :value => '        (Department)'}
-    %fieldset
-      %legend Marital Status
-      %ul
-        %li
-          = radio_button_tag 'apartment_application[marital_status]', 'Single',                                                              |
-            if @apartment_application[:marital_status] == "Single" || @apartment_application[:marital_status].nil? then true else false end, |
-            {:id => "marital_status_sing"}                                                                                                   |
-          Single
-        %li
-          = radio_button_tag 'apartment_application[marital_status]', 'Married', if @apartment_application[:marital_status] == "Married" then true else false end, |
-            {:id => "marital_status_marr"}                                                                                                                         |
-          Married
-        %li
-          = radio_button_tag 'apartment_application[marital_status]', 'Domestic Partner',                                            |
-            if @apartment_application[:marital_status] == "Domestic Partner" then true else false end, {:id => "marital_status_dom"} |
-          Domestic Partner
-        %li
-          = radio_button_tag 'apartment_application[marital_status]', 'Engaged', if @apartment_application[:marital_status] == "Engaged" then true else false end, |
-            {:id => "marital_status_eng"}                                                                                                                          |
-          Engaged: \
-          %em{:style => "color: #000000;"} (Date to be Married)
-          = select_date(Date.today, :order =>[:month, :day, :year], :prefix => 'wedding_date')
-    %fieldset#spouse_info
-      %legend Spouse Information
-      %ul
-        %li
-          Last Name of Spouse, Domestic Partner or Fiancee:
-          \#{text_field_tag 'apartment_application[spouse_last_name]', @apartment_application[:spouse_last_name], :size=>35,:maxlength=>65, :id => "sp_first_name"}
-        %li
-          First Name of Spouse, Domestic Partner or Fiancee:
-          \#{text_field_tag 'apartment_application[spouse_first_name]',@apartment_application[:spouse_first_name],:size=>35,:maxlength=>65, :id => "sp_last_name"}
-        %li
-          Middle Initial of Spouse, Domestic Partner or Fiancee:
-          \#{text_field_tag 'apartment_application[spouse_init]', @apartment_application[:spouse_init], :size=>5,:maxlength=>1, :id => "sp_init"}
-        %li
-          Dawgtag/SS# of Spouse, Domestic Partner or Fiancee:
-          \#{text_field_tag 'apartment_application[spouse_id]', @apartment_application[:spouse_id], :size=>9,:maxlength=>11, :id => "sp_id"}
-        %li
-          Will he/she be a student?
-          \#{radio_button_tag 'apartment_application[spouse_status]', 'Yes',  if @apartment_application[:spouse_status].nil? || @apartment_application[:spouse_status] == "Yes"  then true else false end, :id => "sp_stat_yes"} Yes &nbsp;
-          \#{radio_button_tag 'apartment_application[spouse_status]', 'No', if @apartment_application[:spouse_status] == "No" then true else false end,  :id => "sp_stat_no"} No
-        %li
-          Gender of Spouse, Domestic Partner or Fiancee:
-          \#{radio_button_tag 'apartment_application[spouse_gender]', 'Male',  if @apartment_application[:spouse_gender] == "Male" || @apartment_application[:spouse_gender].nil? then true else false end, :id => "sp_gender_male"} Male &nbsp;
-          \#{radio_button_tag 'apartment_application[spouse_gender]', 'Female', if @apartment_application[:spouse_gender] == "Female" then true else false end,  :id => "sp_gender_female"} Female
-        %li
-          Birthday:
-          \#{select_date Date.today, {:order => [:month, :day, :year], :start_year => Date.today.year - 100, :end_year => Date.today.year, :prefix => 'spouse_birthday'}}
-    %fieldset
-      %legend Children Information
-      %ul
-        %li
-          = label_tag 'Number of Children'
-          = select_tag 'apartment_application[no_children]', options_for_select([['0'],['1'],['2'],['3'],['4']], @apartment_application[:no_children]), {:id => 'no_children'}
-      %table
-        %tr
-          %th/
-          %th Birthday
-          %th{:colspan => "2"} Gender
-        %tr
-          %th Name
-          %th (mm/dd/yyyy)
-          %th Male
-          %th Female
-        %tr
-          %td= text_field_tag 'apartment_application[child_name_1]', @apartment_application[:child_name_1], :size => 35, :maxlength => 65, :id => "child_name_1"
-          %td= text_field_tag 'apartment_application[child_bdate_1]', @apartment_application[:child_bdate_1], :size => 10, :maxlength => 10, :id => "child_bdate_1"
-          %td= radio_button_tag 'apartment_application[child_gender_1]', 'Male', true, :id => "child_gender_1_m"
-          %td= radio_button_tag 'apartment_application[child_gender_1]', 'Female', false, :id => "child_gender_1_f"
-        %tr
-          %td= text_field_tag 'apartment_application[child_name_2]', @apartment_application[:child_name_2], :size => 35, :maxlength => 65, :id => "child_name_2"
-          %td= text_field_tag 'apartment_application[child_bdate_2]', @apartment_application[:child_bdate_2], :size => 10, :maxlength => 10, :id => "child_bdate_2"
-          %td= radio_button_tag 'apartment_application[child_gender_2]', 'Male', true, :id => "child_gender_2_m"
-          %td= radio_button_tag 'apartment_application[child_gender_2]', 'Female', false, :id => "child_gender_2_f"
-        %tr
-          %td= text_field_tag 'apartment_application[child_name_3]', @apartment_application[:child_name_3], :size => 35, :maxlength => 65, :id => "child_name_3"
-          %td= text_field_tag 'apartment_application[child_bdate_3]', @apartment_application[:child_bdate_3], :size => 10, :maxlength => 10, :id => "child_bdate_3"
-          %td= radio_button_tag 'apartment_application[child_gender_3]', 'Male', true, :id => "child_gender_3_m"
-          %td= radio_button_tag 'apartment_application[child_gender_3]', 'Female', false, :id => "child_gender_3_f"
-        %tr
-          %td= text_field_tag 'apartment_application[child_name_4]', @apartment_application[:child_name_4], :size => 35, :maxlength => 65, :id => "child_name_4"
-          %td= text_field_tag 'apartment_application[child_bdate_4]', @apartment_application[:child_bdate_4], :size => 10, :maxlength => 10, :id => "child_bdate_4"
-          %td= radio_button_tag 'apartment_application[child_gender_4]', 'Male', true, :id => "child_gender_4_m"
-          %td= radio_button_tag 'apartment_application[child_gender_4]', 'Female', false, :id => "child_gender_4_f"
-    %fieldset
-      %legend Additional Information
-      %p
-        Have you or your spouse or domestic partner resided in SIUC Housing previously?
-        \#{radio_button_tag 'apartment_application[previous_housing]', 'Yes', if @apartment_application[:previous_housing] == "Yes" then true else false end} Yes &nbsp;
-        \#{radio_button_tag 'apartment_application[previous_housing]', 'No',  if @apartment_application[:previous_housing] == "No" || @apartment_application[:previous_housing].nil? then true else false end} No
-      %p
-        Do you or any members of your immediate family have any disabilities or any other conditions requiring special consideration with regard to housing?
-        \#{radio_button_tag 'apartment_application[disability]', 'Yes'} Yes* &nbsp; #{radio_button_tag 'apartment_application[disability]', 'No',  if @apartment_application[:disability] == "No" || @apartment_application[:disability].nil? then true else false end} No
-      %p
-        *if Yes, please provide your condition and concerns in the following field:
-        %br/
-        = text_area_tag 'apartment_application[disability_info]', @apartment_application[:disability_info], :size => '60x8'
-      %p
-        Have you or any family member ever been convicted of a crime; including but not limited to a felony or misdemeanor?
-        \#{radio_button_tag 'apartment_application[crime]', 'Yes', if @apartment_application[:crime] == "Yes" then true else false end} Yes** &nbsp;
-        \#{radio_button_tag 'apartment_application[crime]', 'No', if @apartment_application[:crime] == "No" || @apartment_application[:crime].nil? then true else false end} No
-      %p
-        **if Yes, explain (date, city, country, state, offense, name used, etc) in the following field. The University reserves
-        the right to verify any information provided before accepting the contract. Providing false information is grounds for
-        rejecting the contract or immediate termination if the contract has been accepted.
-        %br/
-        = text_area_tag 'apartment_application[offense]', @apartment_application[:offense], :size => '60x8'
-    %fieldset
-      %legend Residential Area Preference
-      %table
-        %tr
-          %th First Choice
-          %th Second Choice
-        %tr
-          %td
-            %ul.table
-              %li
-                %strong Evergreen Terrace
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Evergreen-2',                                                           |
-                  if @apartment_application[:preference_1] == "Evergreen-2" || @apartment_application[:preference_1].nil? then true else false end |
-                2-Bedroom Unfurnished
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Evergreen-3',             |
-                  if @apartment_application[:preference_1] == "Evergreen-3" then true else false end |
-                3-Bedroom Unfurnished
-              %li
-                %strong Southern Hills
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Southern-Eff',             |
-                  if @apartment_application[:preference_1] == "Southern-Eff" then true else false end |
-                Efficiency Furnished
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Southern-1',             |
-                  if @apartment_application[:preference_1] == "Southern-1" then true else false end |
-                1-Bedroom Furnished
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Southern-2',             |
-                  if @apartment_application[:preference_1] == "Southern-2" then true else false end |
-                2-Bedroom Furnished
-              %li
-                %strong Elizabeth Apartments
-              %li
-                = radio_button_tag 'apartment_application[preference_1]', 'Elizabeth',             |
-                  if @apartment_application[:preference_1] == "Elizabeth" then true else false end |
-                Efficiency Furnished
-          %td
-            %ul.table
-              %li
-                %strong Evergreen Terrace
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Evergreen-2',                                                           |
-                  if @apartment_application[:preference_2] == "Evergreen-2" || @apartment_application[:preference_2].nil? then true else false end |
-                2-Bedroom Unfurnished
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Evergreen-3',             |
-                  if @apartment_application[:preference_2] == "Evergreen-3" then true else false end |
-                3-Bedroom Unfurnished
-              %li
-                %strong Southern Hills
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Southern-Eff',             |
-                  if @apartment_application[:preference_2] == "Southern-Eff" then true else false end |
-                Efficiency Furnished
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Southern-1',             |
-                  if @apartment_application[:preference_2] == "Southern-1" then true else false end |
-                1-Bedroom Furnished
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Southern-2',             |
-                  if @apartment_application[:preference_2] == "Southern-2" then true else false end |
-                2-Bedroom Furnished
-              %li
-                %strong Elizabeth Apartments
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'Elizabeth',             |
-                  if @apartment_application[:preference_2] == "Elizabeth" then true else false end |
-                Efficiency Furnished
-              %li
-                = radio_button_tag 'apartment_application[preference_2]', 'First_Available',             |
-                  if @apartment_application[:preference_2] == "First Available" then true else false end |
-                First Available
-      %p
-        Approximate Move-in Date Desired: #{select_date Date.today, :order =>[:month, :day, :year], :prefix => "apartment_application"}
-    %fieldset
-      %legend Additional Comments
-      %p= text_area_tag 'apartment_application[comments]', @apartment_application[:comments], :size => '60x8'
-    %fieldset
-      %h4 Documentation Needed with this Application OR with the Contract:
-      %p
-        %strong Student with Children:
-        = succeed "Birth" do
-          %br/
-        Certificate for each child who will reside in the apartment.
-      %p
-        %strong Married Students:
-        = succeed "Certified" do
-          %br/
-        copy of the marriage license.
-      %p
-        %strong Domestic Partners (same sex or opposite sex):
-        = succeed "Join" do
-          %br/
-        responsibility for each other's common welfare and shared financial
-        obligations may be demonstrated by
-        %strong two
-        of the following items:
-      %ul{:style => "list-style: disc;"}
-        %li * Joint mortgage or lease
-        %li * Designation of domestic partner as beneficiary for life insurance.
-        %li * Designation of domestic partner as beneficiary for retirement death benefit.
-        %li * Designation of domestic partner as primary beneficiary in will or of resident in partner's will.
-        %li * Durable property and health care powers of attorney.
-        %li * Joint ownership of a motor vehicle.
-        %li * Joint checking account.
-        %li * Joint credit account.
-        %li * Marriage certificate or equivalent legal documentation.
-      %p
-        %em{:style => "color: #000000;"} Qualifications
-      %ul
-        %li * Are each other's sole partner and intend to remain so indefinitely.
-        %li * Are both at least eighteen (18) years of age.
-        %li * Reside together in the same residence and intend to do so indefinitely.
-        %li * Are not related by blood or to a degree of closeness that would prohibit legal marriage.
-      %p
-        %em{:style => "color: #000000;"} University Housing will be notified immediately if there is a change in status as partners
-      %p
-        %em{:style => "color: #000000;"} In the event of a change, neither one is eligible to have or be a partner in residence for a six-month period following the change
-      %p
-        I understand and agree that occupancy is restricted to me, my spouse or domestic partner, and children as listed and no other adults or children, related or unrelated,
-        may reside in my apartment. I further understand that violation of this regulation can result in eviction proceedings.
-      %p
-        = check_box_tag 'apartment_application[agreement]'
-        I understand and agree with the above statement
-      %p= submit_tag 'Submit this Application'
-  %p
-    Your application will be processed
-    and contracts will be offered based on the following schedule:
-  %table{:width => "\\\"40%\\"}
-    %tr
-      %td{:width => "\\\"60%\\"} Move-in
-      %td{:width => "\\\"40%\\"} Offer Sent
-    %tr
-      %td Spring Semester
-      %td October
-    %tr
-      %td Summer Semester
-      %td April
-    %tr
-      %td Fall Semester
-      %td June
-  %p
-    You will be contacted by University Housing during the appropriate time, based on application date and apartment
-    availability.
+	%h2.johndoe Application for University Housing Apartments
+	%p
+		Complete and submit the following form to apply for University Housing apartments. Please refer to the
+		%a{:href => "http://housing.siu.edu/apartments/eligibility-requirements-restrictions", :title => "Apartment Eligibility, Requirements and Restrictions"} 
+			Eligibility Sections
+		of the website prior to selecting an area.
+	- unless flash[:notice].blank?
+		%p{:style => "font-weight: bold; color: #990000; border: 2px solid #990000; background-color: #FFBBCC;"}= flash[:notice]
+		%br
+	- form_tag({:action => 'apartment_application'}, {:id => "hsgform", :class => "hsgform"}) do
+		%fieldset
+			%legend Application Term
+			%p
+				Year:
+				= select_tag('apartment_application[year]', options_for_select([Time.now.year.to_s, (Time.now.year + 1).to_s, (Time.now.year + 2).to_s], @apartment_application[:year]))
+				Beginning Semester Occupancy Desired: 
+				= radio_button_tag('apartment_application[semester]', 'Fall')
+				\-Fall
+				=radio_button_tag('apartment_application[semester]', 'Spring')
+				\-Spring 
+				=radio_button_tag('apartment_application[semester]', 'Summer')
+				\-Summer
+				
+		%fieldset
+			%legend Contact Information
+			%ul
+				%li
+					= label_tag 'Last Name'
+					= text_field_tag 'apartment_application[last_name]', @apartment_application[:last_name], :size => 35, :maxlength => 65
+				%li
+					= label_tag 'First Name'
+					= text_field_tag 'apartment_application[first_name]', @apartment_application[:first_name], :size => 35, :maxlength => 65
+				%li
+					= label_tag 'Middle Initial'
+					= text_field_tag 'apartment_application[middle_initial]', @apartment_application[:middle_initial], :size => 35, :maxlength => 65
+		%fieldset
+			%legend Mailing Address
+			%ul
+				%li
+					= label_tag 'Street Address'
+					= text_field_tag 'apartment_application[street]',@apartment_application[:street], :size => 35, :maxlength => 65
+				%li
+					= label_tag 'City'
+					= text_field_tag 'apartment_application[city]', @apartment_application[:city], :size => 35, :maxlength => 65
+				%li
+					= label_tag 'State'
+					= select_tag 'apartment_application[state]', options_for_select(["Alabama", "Alaska", "Arizona", "Arkansas", "California", "Colorado", "Connecticut", "Delaware", "Florida", "Georgia", "Hawaii", "Idaho", "Illinois", "Indiana", "Iowa", "Kansas", "Kentucky", "Louisiana", "Maine", "Maryland", "Massachusetts", "Michigan", "Minnesota", "Mississippi", "Missouri", "Montana", "Nebraska", "Nevada", "New Hampshire", "New Jersey", "New Mexico", "New York", "North Carolina", "North Dakota", "Ohio", "Oklahoma", "Oregon", "Pennsylvania", "Puerto Rico", "Rhode Island", "South Carolina", "South Dakota", "Tennessee", "Texas", "Utah", "Vermont", "Virginia", "Washington", "Washington D.C.", "West Virginia", "Wisconsin", "Wyoming"], "Illinois"), {:id => "state"}
+				%li
+					= label_tag 'Country'
+					= select_tag 'apartment_application[country]', country_options_for_select("United States"), {:id => "country"}
+				%li
+					= label_tag 'Zip'
+					= text_field_tag 'apartment_application[zip]', @apartment_application[:zip], :size => 10, :maxlength => 10
+			%ul
+				%li
+					= label_tag 'Home Phone'
+					= text_field_tag 'apartment_application[home_phone]', @apartment_application[:home_phone], :size => 14, :maxlength => 14
+				%li
+					= label_tag 'Contact Phone'
+					= text_field_tag 'apartment_application[contact_phone]',@apartment_application[:contact_phone], :size => 14, :maxlength => 14
+				%li
+					= label_tag 'Email Address'
+					= text_field_tag 'apartment_application[email]', @apartment_application[:email], :size => 30, :maxlength => 65
+				%li
+					= label_tag 'Dawgtag/SS#'
+					= text_field_tag 'apartment_application[dawgtag]', @apartment_application[:dawgtag], :size => 9, :maxlength => 9
+				%li
+					= label_tag 'Birthdate'
+					= text_field_tag 'apartment_application[birthdate]', @apartment_application[:birthdate], :size => 10, :maxlength => 10
+					(MM/DD/YYYY)
+				%li
+					= label_tag 'Gender'
+					= radio_button_tag 'apartment_application[gender]', 'Male', if @apartment_application[:gender] == "Male" || @apartment_application[:gender].nil? then true else false end
+					Male
+					= radio_button_tag 'apartment_application[gender]', 'Female', if @apartment_application[:gender] == "Female" then true else false end 
+					Female
+	%fieldset
+		%legend Student Status
+		%ul
+			%li
+				= radio_button_tag 'apartment_application[student_status]', 'Undergraduate', if @apartment_application[:student_status] == "Undergraduate" || @apartment_application[:student_status].nil? then true else false end, {:id => "student_status_under"}         
+				Undergraduate
+			%li
+				= radio_button_tag 'apartment_application[student_status]','Graduate', if @apartment_application[:student_status] == "Graduate" then true else false end, {:id => "student_status_grad"}
+				Graduate 
+				= check_box_tag 'apartment_application[law]', 'Law', if @apartment_application[:law] == "Law" then true else false end, :id => "law"
+				Law 
+				= check_box_tag 'apartment_application[med]', 'Medical', if @apartment_application[:med] == "Medical" then true else false end, :id => "med"
+				Med
+				= check_box_tag 'apartment_application[other]', 'Other', if @apartment_application[:other] == "Other" then true else false end, :id => "other"
+				Other
+			%li
+				= radio_button_tag 'apartment_application[student_status]', 'Graduate Assistant', if @apartment_application[:student_status] == "Graduate Assistant" then true else false end, {:id => "student_status_ga"} 
+				Graduate Assistant
+			%li
+				= radio_button_tag 'apartment_application[student_status]', 'Faculty', if @apartment_application[:student_status] == "Faculty" then true else false end, {:id => "student_status_fac"} 
+				\- Faculty:
+				= text_field_tag 'apartment_application[department]', @apartment_application[:department],  :id => "department", :size => 20, :maxlength => 32, :value => '        (Department)'
+	%fieldset
+		%legend Marital Status
+		%ul
+			%li
+				= radio_button_tag 'apartment_application[marital_status]', 'Single', if @apartment_application[:marital_status] == "Single" || @apartment_application[:marital_status].nil? then true else false end, {:id => "marital_status_sing"}
+				Single
+			%li
+				= radio_button_tag 'apartment_application[marital_status]', 'Married', if @apartment_application[:marital_status] == "Married" then true else false end, {:id => "marital_status_marr"} 
+				Married
+			%li
+				= radio_button_tag 'apartment_application[marital_status]', 'Domestic Partner', if @apartment_application[:marital_status] == "Domestic Partner" then true else false end, {:id => "marital_status_dom"}
+				Domestic Partner
+			%li
+				= radio_button_tag 'apartment_application[marital_status]', 'Engaged', if @apartment_application[:marital_status] == "Engaged" then true else false end, {:id => "marital_status_eng"} 
+				Engaged: \
+				%em{:style => "color: #000000;"} (Date to be Married)
+				= select_date(Date.today, :order =>[:month, :day, :year], :prefix => 'wedding_date')
+	%fieldset#spouse_info
+		%legend Spouse Information
+		%ul
+			%li
+				Last Name of Spouse, Domestic Partner or Fiancee:
+				= text_field_tag 'apartment_application[spouse_last_name]', @apartment_application[:spouse_last_name], :size=>35,:maxlength=>65, :id => "sp_first_name"
+			%li
+				First Name of Spouse, Domestic Partner or Fiancee:
+				= text_field_tag 'apartment_application[spouse_first_name]',@apartment_application[:spouse_first_name],:size=>35,:maxlength=>65, :id => "sp_last_name"
+			%li
+				Middle Initial of Spouse, Domestic Partner or Fiancee:
+				= text_field_tag 'apartment_application[spouse_init]', @apartment_application[:spouse_init], :size=>5,:maxlength=>1, :id => "sp_init"
+			%li
+				Dawgtag/SS# of Spouse, Domestic Partner or Fiancee:
+				= text_field_tag 'apartment_application[spouse_id]', @apartment_application[:spouse_id], :size=>9,:maxlength=>11, :id => "sp_id"
+			%li
+				Will he/she be a student?
+				=radio_button_tag 'apartment_application[spouse_status]', 'Yes',  if @apartment_application[:spouse_status].nil? || @apartment_application[:spouse_status] == "Yes"  then true else false end, :id => "sp_stat_yes" 
+				Yes &nbsp;
+				= radio_button_tag 'apartment_application[spouse_status]', 'No', if @apartment_application[:spouse_status] == "No" then true else false end,  :id => "sp_stat_no" 
+				No
+			%li
+				Gender of Spouse, Domestic Partner or Fiancee:
+				= radio_button_tag 'apartment_application[spouse_gender]', 'Male',  if @apartment_application[:spouse_gender] == "Male" || @apartment_application[:spouse_gender].nil? then true else false end, :id => "sp_gender_male"
+				Male
+				= radio_button_tag 'apartment_application[spouse_gender]', 'Female', if @apartment_application[:spouse_gender] == "Female" then true else false end,  :id => "sp_gender_female"
+				Female
+			%li
+				Birthday:
+				= select_date Date.today, {:order => [:month, :day, :year], :start_year => Date.today.year - 100, :end_year => Date.today.year, :prefix => 'spouse_birthday'}
+	%fieldset
+		%legend Children Information
+		%ul
+			%li
+				= label_tag 'Number of Children'
+				= select_tag 'apartment_application[no_children]', options_for_select([['0'],['1'],['2'],['3'],['4']], @apartment_application[:no_children]), {:id => 'no_children'}
+		%table
+			%tr
+				%th/
+				%th Birthday
+				%th{:colspan => "2"} Gender
+			%tr
+				%th Name
+				%th (mm/dd/yyyy)
+				%th Male
+				%th Female
+			%tr
+				%td= text_field_tag 'apartment_application[child_name_1]', @apartment_application[:child_name_1], :size => 35, :maxlength => 65, :id => "child_name_1"
+				%td= text_field_tag 'apartment_application[child_bdate_1]', @apartment_application[:child_bdate_1], :size => 10, :maxlength => 10, :id => "child_bdate_1"
+				%td= radio_button_tag 'apartment_application[child_gender_1]', 'Male', true, :id => "child_gender_1_m"
+				%td= radio_button_tag 'apartment_application[child_gender_1]', 'Female', false, :id => "child_gender_1_f"
+			%tr
+				%td= text_field_tag 'apartment_application[child_name_2]', @apartment_application[:child_name_2], :size => 35, :maxlength => 65, :id => "child_name_2"
+				%td= text_field_tag 'apartment_application[child_bdate_2]', @apartment_application[:child_bdate_2], :size => 10, :maxlength => 10, :id => "child_bdate_2"
+				%td= radio_button_tag 'apartment_application[child_gender_2]', 'Male', true, :id => "child_gender_2_m"
+				%td= radio_button_tag 'apartment_application[child_gender_2]', 'Female', false, :id => "child_gender_2_f"
+			%tr
+				%td= text_field_tag 'apartment_application[child_name_3]', @apartment_application[:child_name_3], :size => 35, :maxlength => 65, :id => "child_name_3"
+				%td= text_field_tag 'apartment_application[child_bdate_3]', @apartment_application[:child_bdate_3], :size => 10, :maxlength => 10, :id => "child_bdate_3"
+				%td= radio_button_tag 'apartment_application[child_gender_3]', 'Male', true, :id => "child_gender_3_m"
+				%td= radio_button_tag 'apartment_application[child_gender_3]', 'Female', false, :id => "child_gender_3_f"
+			%tr
+				%td= text_field_tag 'apartment_application[child_name_4]', @apartment_application[:child_name_4], :size => 35, :maxlength => 65, :id => "child_name_4"
+				%td= text_field_tag 'apartment_application[child_bdate_4]', @apartment_application[:child_bdate_4], :size => 10, :maxlength => 10, :id => "child_bdate_4"
+				%td= radio_button_tag 'apartment_application[child_gender_4]', 'Male', true, :id => "child_gender_4_m"
+				%td= radio_button_tag 'apartment_application[child_gender_4]', 'Female', false, :id => "child_gender_4_f"
+	%fieldset
+		%legend Additional Information
+		%p
+			Have you or your spouse or domestic partner resided in SIUC Housing previously?
+			= radio_button_tag 'apartment_application[previous_housing]', 'Yes', if @apartment_application[:previous_housing] == "Yes" then true else false end 
+			Yes
+			= radio_button_tag 'apartment_application[previous_housing]', 'No',  if @apartment_application[:previous_housing] == "No" || @apartment_application[:previous_housing].nil? then true else false end 
+			No
+		%p 
+			Do you or any members of your immediate family have any disabilities or any other conditions requiring special consideration with regard to housing?
+			= radio_button_tag 'apartment_application[disability]', 'Yes'
+			Yes*  
+			= radio_button_tag 'apartment_application[disability]', 'No',  if @apartment_application[:disability] == "No" || @apartment_application[:disability].nil? then true else false end 
+			No
+		%p
+			*if Yes, please provide your condition and concerns in the following field:
+			%br
+			= text_area_tag 'apartment_application[disability_info]', @apartment_application[:disability_info], :size => '60x8'
+		%p
+			Have you or any family member ever been convicted of a crime; including but not limited to a felony or misdemeanor?
+			= radio_button_tag 'apartment_application[crime]', 'Yes', if @apartment_application[:crime] == "Yes" then true else false end
+			Yes**
+			= radio_button_tag 'apartment_application[crime]', 'No', if @apartment_application[:crime] == "No" || @apartment_application[:crime].nil? then true else false end 
+			No
+		%p
+			**if Yes, explain (date, city, country, state, offense, name used, etc) in the following field. The University reserves
+			the right to verify any information provided before accepting the contract. Providing false information is grounds for
+			rejecting the contract or immediate termination if the contract has been accepted.
+			%br
+			= text_area_tag 'apartment_application[offense]', @apartment_application[:offense], :size => '60x8'
+	%fieldset
+		%legend Residential Area Preference
+		%table
+			%tr
+				%th First Choice
+				%th Second Choice
+			%tr
+				%td
+					%ul.table
+						%li
+							%strong Evergreen Terrace
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Evergreen-2', if @apartment_application[:preference_1] == "Evergreen-2" || @apartment_application[:preference_1].nil? then true else false end 
+							2-Bedroom Unfurnished
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Evergreen-3', if @apartment_application[:preference_1] == "Evergreen-3" then true else false end
+							3-Bedroom Unfurnished
+						%li
+							%strong Southern Hills
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Southern-Eff', if @apartment_application[:preference_1] == "Southern-Eff" then true else false end 
+							Efficiency Furnished
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Southern-1', if @apartment_application[:preference_1] == "Southern-1" then true else false end 
+							1-Bedroom Furnished
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Southern-2', if @apartment_application[:preference_1] == "Southern-2" then true else false end 
+							2-Bedroom Furnished
+						%li
+							%strong Elizabeth Apartments
+						%li
+							= radio_button_tag 'apartment_application[preference_1]', 'Elizabeth', if @apartment_application[:preference_1] == "Elizabeth" then true else false end 
+							Efficiency Furnished
+				%td
+					%ul.table
+						%li
+							%strong Evergreen Terrace
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Evergreen-2', if @apartment_application[:preference_2] == "Evergreen-2" || @apartment_application[:preference_2].nil? then true else false end 
+							2-Bedroom Unfurnished
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Evergreen-3', if @apartment_application[:preference_2] == "Evergreen-3" then true else false end 
+							3-Bedroom Unfurnished
+						%li
+							%strong Southern Hills
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Southern-Eff', if @apartment_application[:preference_2] == "Southern-Eff" then true else false end 
+							Efficiency Furnished
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Southern-1', if @apartment_application[:preference_2] == "Southern-1" then true else false end 
+							1-Bedroom Furnished
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Southern-2', if @apartment_application[:preference_2] == "Southern-2" then true else false end 
+							2-Bedroom Furnished
+						%li
+							%strong Elizabeth Apartments
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'Elizabeth', if @apartment_application[:preference_2] == "Elizabeth" then true else false end 
+							Efficiency Furnished
+						%li
+							= radio_button_tag 'apartment_application[preference_2]', 'First_Available', if @apartment_application[:preference_2] == "First Available" then true else false end 
+							First Available
+						%p
+							Approximate Move-in Date Desired:
+							= select_date Date.today, :order =>[:month, :day, :year], :prefix => "apartment_application"
+	%fieldset
+		%legend Additional Comments
+		%p= text_area_tag 'apartment_application[comments]', @apartment_application[:comments], :size => '60x8'
+	%fieldset
+		%h4 Documentation Needed with this Application OR with the Contract:
+		%p
+			%strong Student with Children:
+			%br
+			Certificate for each child who will reside in the apartment.
+		%p
+			%strong Married Students:
+			%br
+			copy of the marriage license.
+		%p
+			%strong Domestic Partners (same sex or opposite sex):
+			%br
+			responsibility for each other's common welfare and shared financial obligations may be demonstrated by
+			%strong two
+			of the following items:
+		%ul{:style => "list-style: disc;"}
+			%li * Joint mortgage or lease
+			%li * Designation of domestic partner as beneficiary for life insurance.
+			%li * Designation of domestic partner as beneficiary for retirement death benefit.
+			%li * Designation of domestic partner as primary beneficiary in will or of resident in partner's will.
+			%li * Durable property and health care powers of attorney.
+			%li * Joint ownership of a motor vehicle.
+			%li * Joint checking account.
+			%li * Joint credit account.
+			%li * Marriage certificate or equivalent legal documentation.
+		%p
+			%em{:style => "color: #000000;"} Qualifications
+		%ul
+			%li * Are each other's sole partner and intend to remain so indefinitely.
+			%li * Are both at least eighteen (18) years of age.
+			%li * Reside together in the same residence and intend to do so indefinitely.
+			%li * Are not related by blood or to a degree of closeness that would prohibit legal marriage.
+		%p
+			%em{:style => "color: #000000;"} University Housing will be notified immediately if there is a change in status as partners
+		%p
+			%em{:style => "color: #000000;"} In the event of a change, neither one is eligible to have or be a partner in residence for a six-month period following the change
+		%p
+			I understand and agree that occupancy is restricted to me, my spouse or domestic partner, and children as listed and no other adults or children, related or unrelated, may reside in my apartment. I further understand that violation of this regulation can result in eviction proceedings.
+		%p
+			= check_box_tag 'apartment_application[agreement]'
+			I understand and agree with the above statement
+		%p= submit_tag 'Submit this Application'
+%p
+	Your application will be processed and contracts will be offered based on the following schedule:
+%table{:width => "\\\"40%\\"}
+	%tr
+		%td{:width => "\\\"60%\\"} Move-in
+		%td{:width => "\\\"40%\\"} Offer Sent
+	%tr
+		%td Spring Semester
+		%td October
+	%tr
+		%td Summer Semester
+		%td April
+	%tr
+		%td Fall Semester
+		%td June
+%p
+	You will be contacted by University Housing during the appropriate time, based on application date and apartment
+	availability.
